@@ -1,0 +1,136 @@
+{
+    "stock": [
+      {
+        "id": 1,
+        "nome": "Cimento",
+        "descricao": "Material em pó utilizado para misturas de betão e argamassa.",
+        "categoria": "Materiais Básicos",
+        "quantidade": 250,
+        "unidade": "sacos (50kg)",
+        "preco_unitario": 8.50,
+        "fornecedor": "Cimpor",
+        "imagem": "https://example.com/imagens/cimento.jpg"
+      },
+      {
+        "id": 2,
+        "nome": "Areia",
+        "descricao": "Areia fina e grossa utilizada em alvenaria e betão.",
+        "categoria": "Materiais Básicos",
+        "quantidade": 150,
+        "unidade": "m³",
+        "preco_unitario": 20.00,
+        "fornecedor": "Areias & Cia",
+        "imagem": "https://example.com/imagens/areia.jpg"
+      },
+      {
+        "id": 3,
+        "nome": "Brita",
+        "descricao": "Pedra triturada utilizada na produção de betão.",
+        "categoria": "Materiais Básicos",
+        "quantidade": 100,
+        "unidade": "m³",
+        "preco_unitario": 35.00,
+        "fornecedor": "Pedreira Nacional",
+        "imagem": "https://example.com/imagens/brita.jpg"
+      },
+      {
+        "id": 4,
+        "nome": "Blocos de cimento",
+        "descricao": "Blocos utilizados para a construção de paredes e muros.",
+        "categoria": "Alvenaria",
+        "quantidade": 5000,
+        "unidade": "unidade",
+        "preco_unitario": 1.20,
+        "fornecedor": "Blocos e Cia",
+        "imagem": "https://example.com/imagens/bloco_cimento.jpg"
+      },
+      {
+        "id": 5,
+        "nome": "Tijolos",
+        "descricao": "Tijolos de barro cozido para alvenaria.",
+        "categoria": "Alvenaria",
+        "quantidade": 3000,
+        "unidade": "milheiro",
+        "preco_unitario": 150.00,
+        "fornecedor": "Cerâmica Lusitana",
+        "imagem": "https://example.com/imagens/tijolos.jpg"
+      },
+      {
+        "id": 6,
+        "nome": "Vigas de ferro",
+        "descricao": "Vigas metálicas para estruturas e fundações.",
+        "categoria": "Estruturas Metálicas",
+        "quantidade": 250,
+        "unidade": "metros lineares",
+        "preco_unitario": 25.00,
+        "fornecedor": "Metalurgica XYZ",
+        "imagem": "https://example.com/imagens/vigas_ferro.jpg"
+      },
+      {
+        "id": 7,
+        "nome": "Tinta acrílica",
+        "descricao": "Tinta para pintura de interiores e exteriores.",
+        "categoria": "Acabamentos",
+        "quantidade": 80,
+        "unidade": "baldes (18L)",
+        "preco_unitario": 45.00,
+        "fornecedor": "Tintas ColorMix",
+        "imagem": "https://example.com/imagens/tinta_acrilica.jpg"
+      },
+      {
+        "id": 8,
+        "nome": "Telhas cerâmicas",
+        "descricao": "Telhas de barro utilizadas na cobertura de telhados.",
+        "categoria": "Coberturas",
+        "quantidade": 1200,
+        "unidade": "milheiro",
+        "preco_unitario": 600.00,
+        "fornecedor": "Telhas Portugal",
+        "imagem": "https://example.com/imagens/telhas_ceramicas.jpg"
+      },
+      {
+        "id": 9,
+        "nome": "Tubos PVC",
+        "descricao": "Tubos para canalizações de água e esgoto.",
+        "categoria": "Hidráulica",
+        "quantidade": 500,
+        "unidade": "barras (6m)",
+        "preco_unitario": 12.00,
+        "fornecedor": "Tuboplast",
+        "imagem": "https://example.com/imagens/tubos_pvc.jpg"
+      },
+      {
+        "id": 10,
+        "nome": "Fios elétricos",
+        "descricao": "Fiação elétrica para instalações domésticas e industriais.",
+        "categoria": "Elétrica",
+        "quantidade": 300,
+        "unidade": "rolos (100m)",
+        "preco_unitario": 80.00,
+        "fornecedor": "Eletricor",
+        "imagem": "https://example.com/imagens/fios_eletricos.jpg"
+      },
+      {
+        "id": 11,
+        "nome": "Portas de madeira",
+        "descricao": "Portas para interiores e exteriores.",
+        "categoria": "Carpintaria",
+        "quantidade": 50,
+        "unidade": "unidade",
+        "preco_unitario": 120.00,
+        "fornecedor": "Madeireira Boa Vista",
+        "imagem": "https://example.com/imagens/portas_madeira.jpg"
+      },
+      {
+        "id": 12,
+        "nome": "Janelas de alumínio",
+        "descricao": "Janelas de alumínio com vidro duplo.",
+        "categoria": "Carpintaria",
+        "quantidade": 30,
+        "unidade": "unidade",
+        "preco_unitario": 250.00,
+        "fornecedor": "Alumínio & Vidro",
+        "imagem": "https://example.com/imagens/janelas_aluminio.jpg"
+      }
+    ]
+  }

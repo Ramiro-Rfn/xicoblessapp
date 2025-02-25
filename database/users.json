@@ -1,0 +1,56 @@
+{
+    "usuarios": [
+      {
+        "id": 1,
+        "nome": "Ediloiro Batalha",
+        "email": "ediloiro@xicobless.com",
+        "role": "Administrador",
+        "permissoes": [
+          "gerenciar_usuarios",
+          "visualizar_relatorios",
+          "aprovar_projetos",
+          "controlar_financas"
+        ],
+        "imagem": "https://example.com/imagens/ediloiro.jpg"
+      },
+      {
+        "id": 2,
+        "nome": "Ramiro Nzau",
+        "email": "ramiro@xicobless.com",
+        "role": "Engenheiro",
+        "permissoes": [
+          "gerenciar_projetos",
+          "visualizar_orcamentos",
+          "supervisionar_obra",
+          "emitir_relatorios_tecnicos"
+        ],
+        "imagem": "https://example.com/imagens/ramiro.jpg"
+      },
+      {
+        "id": 3,
+        "nome": "António Madeira",
+        "email": "antonio@xicobless.com",
+        "role": "Mestre de Obras",
+        "permissoes": [
+          "gerenciar_equipe",
+          "acompanhar_estoque",
+          "supervisionar_execucao",
+          "reportar_progresso"
+        ],
+        "imagem": "https://example.com/imagens/antonio.jpg"
+      },
+      {
+        "id": 4,
+        "nome": "Kelson EA",
+        "email": "kelson@xicobless.com",
+        "role": "Financeiro",
+        "permissoes": [
+          "gerenciar_pagamentos",
+          "analisar_custos",
+          "emitir_faturas",
+          "aprovar_compras"
+        ],
+        "imagem": "https://example.com/imagens/kelson.jpg"
+      }
+    ]
+  }

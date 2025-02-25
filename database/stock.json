@@ -1,0 +1,100 @@
+{
+    "materiais": [
+      {
+        "id": 1,
+        "nome": "Cimento",
+        "categoria": "Estrutura",
+        "unidade": "Saco (50kg)",
+        "estoque": 100,
+        "imagem": "https://example.com/imagens/cimento.jpg"
+      },
+      {
+        "id": 2,
+        "nome": "Areia",
+        "categoria": "Agregado",
+        "unidade": "Metro cúbico",
+        "estoque": 50,
+        "imagem": "https://example.com/imagens/areia.jpg"
+      },
+      {
+        "id": 3,
+        "nome": "Brita",
+        "categoria": "Agregado",
+        "unidade": "Metro cúbico",
+        "estoque": 30,
+        "imagem": "https://example.com/imagens/brita.jpg"
+      },
+      {
+        "id": 4,
+        "nome": "Tijolo",
+        "categoria": "Alvenaria",
+        "unidade": "Milheiro",
+        "estoque": 2000,
+        "imagem": "https://example.com/imagens/tijolo.jpg"
+      },
+      {
+        "id": 5,
+        "nome": "Bloco de Concreto",
+        "categoria": "Alvenaria",
+        "unidade": "Unidade",
+        "estoque": 500,
+        "imagem": "https://example.com/imagens/bloco_concreto.jpg"
+      },
+      {
+        "id": 6,
+        "nome": "Vergalhão",
+        "categoria": "Estrutura",
+        "unidade": "Barra (12m)",
+        "estoque": 150,
+        "imagem": "https://example.com/imagens/vergalhao.jpg"
+      },
+      {
+        "id": 7,
+        "nome": "Telha de Cerâmica",
+        "categoria": "Cobertura",
+        "unidade": "Unidade",
+        "estoque": 800,
+        "imagem": "https://example.com/imagens/telha_ceramica.jpg"
+      },
+      {
+        "id": 8,
+        "nome": "Madeira para Construção",
+        "categoria": "Estrutura",
+        "unidade": "Metro",
+        "estoque": 300,
+        "imagem": "https://example.com/imagens/madeira.jpg"
+      },
+      {
+        "id": 9,
+        "nome": "Tinta Látex",
+        "categoria": "Acabamento",
+        "unidade": "Lata (18L)",
+        "estoque": 60,
+        "imagem": "https://example.com/imagens/tinta_latex.jpg"
+      },
+      {
+        "id": 10,
+        "nome": "Rejunte",
+        "categoria": "Acabamento",
+        "unidade": "Saco (1kg)",
+        "estoque": 120,
+        "imagem": "https://example.com/imagens/rejunte.jpg"
+      },
+      {
+        "id": 11,
+        "nome": "Tubos de PVC",
+        "categoria": "Hidráulica",
+        "unidade": "Metro",
+        "estoque": 400,
+        "imagem": "https://example.com/imagens/tubos_pvc.jpg"
+      },
+      {
+        "id": 12,
+        "nome": "Fios Elétricos",
+        "categoria": "Elétrica",
+        "unidade": "Rolo (100m)",
+        "estoque": 250,
+        "imagem": "https://example.com/imagens/fios_eletricos.jpg"
+      }
+    ]
+  }
