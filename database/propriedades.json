@@ -1,136 +1,122 @@
-{
-    "stock": [
-      {
-        "id": 1,
-        "nome": "Cimento",
-        "descricao": "Material em pó utilizado para misturas de betão e argamassa.",
-        "categoria": "Materiais Básicos",
-        "quantidade": 250,
-        "unidade": "sacos (50kg)",
-        "preco_unitario": 8.50,
-        "fornecedor": "Cimpor",
-        "imagem": "https://example.com/imagens/cimento.jpg"
-      },
-      {
-        "id": 2,
-        "nome": "Areia",
-        "descricao": "Areia fina e grossa utilizada em alvenaria e betão.",
-        "categoria": "Materiais Básicos",
-        "quantidade": 150,
-        "unidade": "m³",
-        "preco_unitario": 20.00,
-        "fornecedor": "Areias & Cia",
-        "imagem": "https://example.com/imagens/areia.jpg"
-      },
-      {
-        "id": 3,
-        "nome": "Brita",
-        "descricao": "Pedra triturada utilizada na produção de betão.",
-        "categoria": "Materiais Básicos",
-        "quantidade": 100,
-        "unidade": "m³",
-        "preco_unitario": 35.00,
-        "fornecedor": "Pedreira Nacional",
-        "imagem": "https://example.com/imagens/brita.jpg"
-      },
-      {
-        "id": 4,
-        "nome": "Blocos de cimento",
-        "descricao": "Blocos utilizados para a construção de paredes e muros.",
-        "categoria": "Alvenaria",
-        "quantidade": 5000,
-        "unidade": "unidade",
-        "preco_unitario": 1.20,
-        "fornecedor": "Blocos e Cia",
-        "imagem": "https://example.com/imagens/bloco_cimento.jpg"
-      },
-      {
-        "id": 5,
-        "nome": "Tijolos",
-        "descricao": "Tijolos de barro cozido para alvenaria.",
-        "categoria": "Alvenaria",
-        "quantidade": 3000,
-        "unidade": "milheiro",
-        "preco_unitario": 150.00,
-        "fornecedor": "Cerâmica Lusitana",
-        "imagem": "https://example.com/imagens/tijolos.jpg"
-      },
-      {
-        "id": 6,
-        "nome": "Vigas de ferro",
-        "descricao": "Vigas metálicas para estruturas e fundações.",
-        "categoria": "Estruturas Metálicas",
-        "quantidade": 250,
-        "unidade": "metros lineares",
-        "preco_unitario": 25.00,
-        "fornecedor": "Metalurgica XYZ",
-        "imagem": "https://example.com/imagens/vigas_ferro.jpg"
-      },
-      {
-        "id": 7,
-        "nome": "Tinta acrílica",
-        "descricao": "Tinta para pintura de interiores e exteriores.",
-        "categoria": "Acabamentos",
-        "quantidade": 80,
-        "unidade": "baldes (18L)",
-        "preco_unitario": 45.00,
-        "fornecedor": "Tintas ColorMix",
-        "imagem": "https://example.com/imagens/tinta_acrilica.jpg"
-      },
-      {
-        "id": 8,
-        "nome": "Telhas cerâmicas",
-        "descricao": "Telhas de barro utilizadas na cobertura de telhados.",
-        "categoria": "Coberturas",
-        "quantidade": 1200,
-        "unidade": "milheiro",
-        "preco_unitario": 600.00,
-        "fornecedor": "Telhas Portugal",
-        "imagem": "https://example.com/imagens/telhas_ceramicas.jpg"
-      },
-      {
-        "id": 9,
-        "nome": "Tubos PVC",
-        "descricao": "Tubos para canalizações de água e esgoto.",
-        "categoria": "Hidráulica",
-        "quantidade": 500,
-        "unidade": "barras (6m)",
-        "preco_unitario": 12.00,
-        "fornecedor": "Tuboplast",
-        "imagem": "https://example.com/imagens/tubos_pvc.jpg"
-      },
-      {
-        "id": 10,
-        "nome": "Fios elétricos",
-        "descricao": "Fiação elétrica para instalações domésticas e industriais.",
-        "categoria": "Elétrica",
-        "quantidade": 300,
-        "unidade": "rolos (100m)",
-        "preco_unitario": 80.00,
-        "fornecedor": "Eletricor",
-        "imagem": "https://example.com/imagens/fios_eletricos.jpg"
-      },
-      {
-        "id": 11,
-        "nome": "Portas de madeira",
-        "descricao": "Portas para interiores e exteriores.",
-        "categoria": "Carpintaria",
-        "quantidade": 50,
-        "unidade": "unidade",
-        "preco_unitario": 120.00,
-        "fornecedor": "Madeireira Boa Vista",
-        "imagem": "https://example.com/imagens/portas_madeira.jpg"
-      },
-      {
-        "id": 12,
-        "nome": "Janelas de alumínio",
-        "descricao": "Janelas de alumínio com vidro duplo.",
-        "categoria": "Carpintaria",
-        "quantidade": 30,
-        "unidade": "unidade",
-        "preco_unitario": 250.00,
-        "fornecedor": "Alumínio & Vidro",
-        "imagem": "https://example.com/imagens/janelas_aluminio.jpg"
-      }
-    ]
-  }
+[
+    {
+      "id": 1,
+      "nome": "Condomínio Bela Vista",
+      "tipo": "Residencial",
+      "area": "5000m²",
+      "andares": 5,
+      "status": "50% concluído",
+      "previsao_entrega": "2025-06",
+      "custo_estimado": 8000000,
+      "imagem": "project1a.png",
+      "descricao": "Um moderno condomínio residencial projetado para oferecer conforto e segurança, com área de lazer, estacionamento e infraestrutura completa."
+    },
+    {
+      "id": 2,
+      "nome": "Shopping Nova Era",
+      "tipo": "Comercial",
+      "area": "15000m²",
+      "andares": 3,
+      "status": "40% concluído",
+      "previsao_entrega": "2026-02",
+      "custo_estimado": 20000000,
+      "imagem": "project2a.png",
+      "descricao": "Um novo shopping center que oferecerá uma ampla variedade de lojas, praça de alimentação e espaços de lazer para toda a família."
+    },
+    {
+      "id": 3,
+      "nome": "Hospital Vida e Saúde",
+      "tipo": "Saúde",
+      "area": "10000m²",
+      "andares": 4,
+      "status": "60% concluído",
+      "previsao_entrega": "2025-09",
+      "custo_estimado": 15000000,
+      "imagem": "project3a.png",
+      "descricao": "Um hospital moderno e bem equipado para atender diversas especialidades médicas, com centro cirúrgico, pronto-socorro e UTI."
+    },
+    {
+      "id": 4,
+      "nome": "Centro Tecnológico",
+      "tipo": "Comercial",
+      "area": "12000m²",
+      "andares": 6,
+      "status": "35% concluído",
+      "previsao_entrega": "2026-05",
+      "custo_estimado": 18000000,
+      "imagem": "project4a.png",
+      "descricao": "Um complexo empresarial voltado para startups e empresas de tecnologia, com infraestrutura moderna e espaços colaborativos."
+    },
+    {
+      "id": 5,
+      "nome": "Residencial Jardim das Flores",
+      "tipo": "Residencial",
+      "area": "7000m²",
+      "andares": 10,
+      "status": "70% concluído",
+      "previsao_entrega": "2025-03",
+      "custo_estimado": 12000000,
+      "imagem": "project5a.png",
+      "descricao": "Um condomínio residencial de alto padrão com apartamentos amplos, área de lazer completa e segurança 24 horas."
+    },
+    {
+      "id": 6,
+      "nome": "Resort Paraíso",
+      "tipo": "Turístico",
+      "area": "25000m²",
+      "andares": 2,
+      "status": "30% concluído",
+      "previsao_entrega": "2026-10",
+      "custo_estimado": 50000000,
+      "imagem": "project6a.png",
+      "descricao": "Um resort de luxo com infraestrutura completa, incluindo piscinas, restaurantes, spa e atividades recreativas para toda a família."
+    },
+    {
+      "id": 7,
+      "nome": "Edifício Infinity Tower",
+      "tipo": "Comercial",
+      "area": "20000m²",
+      "andares": 25,
+      "status": "55% concluído",
+      "previsao_entrega": "2025-12",
+      "custo_estimado": 35000000,
+      "imagem": "project7a.png",
+      "descricao": "Um prédio comercial de alto padrão com escritórios modernos, auditórios e espaços de coworking."
+    },
+    {
+      "id": 8,
+      "nome": "Fábrica EcoTech",
+      "tipo": "Industrial",
+      "area": "15000m²",
+      "andares": 1,
+      "status": "45% concluído",
+      "previsao_entrega": "2026-04",
+      "custo_estimado": 10000000,
+      "imagem": "project9a.png",
+      "descricao": "Uma fábrica moderna com foco em sustentabilidade, utilizando tecnologias inovadoras para reduzir o impacto ambiental."
+    },
+    {
+      "id": 9,
+      "nome": "Aeroporto Regional",
+      "tipo": "Infraestrutura",
+      "area": "50000m²",
+      "andares": 2,
+      "status": "20% concluído",
+      "previsao_entrega": "2027-06",
+      "custo_estimado": 100000000,
+      "imagem": "project11a.png",
+      "descricao": "Um novo aeroporto regional para melhorar a conexão entre cidades, com terminais modernos e capacidade para voos nacionais e internacionais."
+    },
+    {
+      "id": 10,
+      "nome": "Escola Modelo",
+      "tipo": "Educação",
+      "area": "8000m²",
+      "andares": 3,
+      "status": "65% concluído",
+      "previsao_entrega": "2025-08",
+      "custo_estimado": 9000000,
+      "imagem": "project12a.png",
+      "descricao": "Uma escola moderna com infraestrutura completa, laboratórios, biblioteca e espaços interativos para aprendizado."
+    }
+  ]

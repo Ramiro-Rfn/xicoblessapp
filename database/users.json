@@ -1,9 +1,10 @@
-{
-    "usuarios": [
+
+    [
       {
         "id": 1,
         "nome": "Ediloiro Batalha",
         "email": "ediloiro@xicobless.com",
+        "password": "123456",
         "role": "Administrador",
         "permissoes": [
           "gerenciar_usuarios",
@@ -17,6 +18,7 @@
         "id": 2,
         "nome": "Ramiro Nzau",
         "email": "ramiro@xicobless.com",
+        "password": "123456",
         "role": "Engenheiro",
         "permissoes": [
           "gerenciar_projetos",
@@ -30,6 +32,7 @@
         "id": 3,
         "nome": "António Madeira",
         "email": "antonio@xicobless.com",
+        "password": "123456",
         "role": "Mestre de Obras",
         "permissoes": [
           "gerenciar_equipe",
@@ -43,6 +46,7 @@
         "id": 4,
         "nome": "Kelson EA",
         "email": "kelson@xicobless.com",
+        "password": "123456",
         "role": "Financeiro",
         "permissoes": [
           "gerenciar_pagamentos",
@@ -53,4 +57,4 @@
         "imagem": "https://example.com/imagens/kelson.jpg"
       }
     ]
-  }
+

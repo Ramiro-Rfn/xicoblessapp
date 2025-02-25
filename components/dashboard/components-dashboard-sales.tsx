@@ -1,12 +1,12 @@
 'use client';
 import Dropdown from '@/components/dropdown';
 import IconHorizontalDots from '@/components/icon/icon-horizontal-dots';
-import IconMultipleForwardRight from '@/components/icon/icon-multiple-forward-right';
 import { IRootState } from '@/store';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { useSelector } from 'react-redux';
+
+import materialSolicitation from '@/database/materialSolicitationDefaul.json';
 
 const ComponentsDashboardSales = () => {
     const isDark = useSelector((state: IRootState) => state.themeConfig.theme === 'dark' || state.themeConfig.isDarkMode);
@@ -21,11 +21,11 @@ const ComponentsDashboardSales = () => {
     const revenueChart: any = {
         series: [
             {
-                name: 'Income',
+                name: 'Entradas',
                 data: [16800, 16800, 15500, 17800, 15500, 17000, 19000, 16000, 15000, 17000, 14000, 17000],
             },
             {
-                name: 'Expenses',
+                name: 'Despesas',
                 data: [16500, 17500, 16200, 17300, 16000, 19500, 16000, 17000, 16000, 19000, 18000, 19000],
             },
         ],
@@ -233,7 +233,7 @@ const ComponentsDashboardSales = () => {
                     },
                 },
             },
-            labels: ['Apparel', 'Sports', 'Others'],
+            labels: ['Pendentes','Acabadas', 'Entregues'],
             states: {
                 hover: {
                     filter: {
@@ -252,160 +252,16 @@ const ComponentsDashboardSales = () => {
     };
 
     //Daily Sales
-    const dailySales: any = {
-        series: [
-            {
-                name: 'Sales',
-                data: [44, 55, 41, 67, 22, 43, 21],
-            },
-            {
-                name: 'Last Week',
-                data: [13, 23, 20, 8, 13, 27, 33],
-            },
-        ],
-        options: {
-            chart: {
-                height: 160,
-                type: 'bar',
-                fontFamily: 'Nunito, sans-serif',
-                toolbar: {
-                    show: false,
-                },
-                stacked: true,
-                stackType: '100%',
-            },
-            dataLabels: {
-                enabled: false,
-            },
-            stroke: {
-                show: true,
-                width: 1,
-            },
-            colors: ['#e2a03f', '#e0e6ed'],
-            responsive: [
-                {
-                    breakpoint: 480,
-                    options: {
-                        legend: {
-                            position: 'bottom',
-                            offsetX: -10,
-                            offsetY: 0,
-                        },
-                    },
-                },
-            ],
-            xaxis: {
-                labels: {
-                    show: false,
-                },
-                categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
-            },
-            yaxis: {
-                show: false,
-            },
-            fill: {
-                opacity: 1,
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                    columnWidth: '25%',
-                },
-            },
-            legend: {
-                show: false,
-            },
-            grid: {
-                show: false,
-                xaxis: {
-                    lines: {
-                        show: false,
-                    },
-                },
-                padding: {
-                    top: 10,
-                    right: -20,
-                    bottom: -20,
-                    left: -20,
-                },
-            },
-        },
-    };
 
-    //Total Orders
-    const totalOrders: any = {
-        series: [
-            {
-                name: 'Sales',
-                data: [28, 40, 36, 52, 38, 60, 38, 52, 36, 40],
-            },
-        ],
-        options: {
-            chart: {
-                height: 290,
-                type: 'area',
-                fontFamily: 'Nunito, sans-serif',
-                sparkline: {
-                    enabled: true,
-                },
-            },
-            stroke: {
-                curve: 'smooth',
-                width: 2,
-            },
-            colors: isDark ? ['#00ab55'] : ['#00ab55'],
-            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-            yaxis: {
-                min: 0,
-                show: false,
-            },
-            grid: {
-                padding: {
-                    top: 125,
-                    right: 0,
-                    bottom: 0,
-                    left: 0,
-                },
-            },
-            fill: {
-                opacity: 1,
-                type: 'gradient',
-                gradient: {
-                    type: 'vertical',
-                    shadeIntensity: 1,
-                    inverseColors: !1,
-                    opacityFrom: 0.3,
-                    opacityTo: 0.05,
-                    stops: [100, 100],
-                },
-            },
-            tooltip: {
-                x: {
-                    show: false,
-                },
-            },
-        },
-    };
 
     return (
         <>
             <div>
-                <ul className="flex space-x-2 rtl:space-x-reverse">
-                    <li>
-                        <Link href="/" className="text-primary hover:underline">
-                            Dashboard
-                        </Link>
-                    </li>
-                    <li className="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
-                        <span>Sales</span>
-                    </li>
-                </ul>
-
                 <div className="pt-5">
                     <div className="mb-6 grid gap-6 xl:grid-cols-3">
                         <div className="panel h-full xl:col-span-2">
                             <div className="mb-5 flex items-center justify-between dark:text-white-light">
-                                <h5 className="text-lg font-semibold">Revenue</h5>
+                                <h5 className="text-lg font-semibold">Receitas</h5>
                                 <div className="dropdown">
                                     <Dropdown
                                         offset={[0, 1]}
@@ -427,7 +283,7 @@ const ComponentsDashboardSales = () => {
                                 </div>
                             </div>
                             <p className="text-lg dark:text-white-light/90">
-                                Total Profit <span className="ml-2 text-primary">$10,840</span>
+                                Lucro Total <span className="ml-2 text-primary">10.840.000 kz</span>
                             </p>
                             <div className="relative">
                                 <div className="rounded-lg bg-white dark:bg-black">
@@ -444,7 +300,7 @@ const ComponentsDashboardSales = () => {
 
                         <div className="panel h-full">
                             <div className="mb-5 flex items-center">
-                                <h5 className="text-lg font-semibold dark:text-white-light">Sales By Category</h5>
+                                <h5 className="text-lg font-semibold dark:text-white-light">Desempenho obras</h5>
                             </div>
                             <div>
                                 <div className="rounded-lg bg-white dark:bg-black">
@@ -463,220 +319,61 @@ const ComponentsDashboardSales = () => {
 
 
 
-                    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                        <div className="panel h-full w-full">
+                    <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                        <div className="panel h-full w-full col-span-3">
                             <div className="mb-5 flex items-center justify-between">
-                                <h5 className="text-lg font-semibold dark:text-white-light">Recent Orders</h5>
+                                <h5 className="text-lg font-semibold dark:text-white-light">Solicitações de materiais</h5>
                             </div>
                             <div className="table-responsive">
                                 <table>
                                     <thead>
                                         <tr>
                                             <th className="ltr:rounded-l-md rtl:rounded-r-md">Customer</th>
-                                            <th>Product</th>
-                                            <th>Invoice</th>
-                                            <th>Price</th>
+                                            <th>Material</th>
+                                            <th>Solicitante</th>
+                                            <th>Data</th>
+                                            <th>Quantidade</th>
                                             <th className="ltr:rounded-r-md rtl:rounded-l-md">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
-                                            <td className="min-w-[150px] text-black dark:text-white">
-                                                <div className="flex items-center">
-                                                    <img className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3" src="/assets/images/profile-6.jpeg" alt="avatar" />
-                                                    <span className="whitespace-nowrap">Luke Ivory</span>
-                                                </div>
-                                            </td>
-                                            <td className="text-primary">Headphone</td>
-                                            <td>
-                                                <Link href="/apps/invoice/preview">#46894</Link>
-                                            </td>
-                                            <td>$56.07</td>
-                                            <td>
-                                                <span className="badge bg-success shadow-md dark:group-hover:bg-transparent">Paid</span>
-                                            </td>
-                                        </tr>
-                                        <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
-                                            <td className="text-black dark:text-white">
-                                                <div className="flex items-center">
-                                                    <img className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3" src="/assets/images/profile-7.jpeg" alt="avatar" />
-                                                    <span className="whitespace-nowrap">Andy King</span>
-                                                </div>
-                                            </td>
-                                            <td className="text-info">Nike Sport</td>
-                                            <td>
-                                                <Link href="/apps/invoice/preview">#76894</Link>
-                                            </td>
-                                            <td>$126.04</td>
-                                            <td>
-                                                <span className="badge bg-secondary shadow-md dark:group-hover:bg-transparent">Shipped</span>
-                                            </td>
-                                        </tr>
-                                        <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
-                                            <td className="text-black dark:text-white">
-                                                <div className="flex items-center">
-                                                    <img className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3" src="/assets/images/profile-8.jpeg" alt="avatar" />
-                                                    <span className="whitespace-nowrap">Laurie Fox</span>
-                                                </div>
-                                            </td>
-                                            <td className="text-warning">Sunglasses</td>
-                                            <td>
-                                                <Link href="/apps/invoice/preview">#66894</Link>
-                                            </td>
-                                            <td>$56.07</td>
-                                            <td>
-                                                <span className="badge bg-success shadow-md dark:group-hover:bg-transparent">Paid</span>
-                                            </td>
-                                        </tr>
-                                        <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
-                                            <td className="text-black dark:text-white">
-                                                <div className="flex items-center">
-                                                    <img className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3" src="/assets/images/profile-9.jpeg" alt="avatar" />
-                                                    <span className="whitespace-nowrap">Ryan Collins</span>
-                                                </div>
-                                            </td>
-                                            <td className="text-danger">Sport</td>
-                                            <td>
-                                                <button type="button">#75844</button>
-                                            </td>
-                                            <td>$110.00</td>
-                                            <td>
-                                                <span className="badge bg-secondary shadow-md dark:group-hover:bg-transparent">Shipped</span>
-                                            </td>
-                                        </tr>
-                                        <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
-                                            <td className="text-black dark:text-white">
-                                                <div className="flex items-center">
-                                                    <img className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3" src="/assets/images/profile-10.jpeg" alt="avatar" />
-                                                    <span className="whitespace-nowrap">Irene Collins</span>
-                                                </div>
-                                            </td>
-                                            <td className="text-secondary">Speakers</td>
-                                            <td>
-                                                <Link href="/apps/invoice/preview">#46894</Link>
-                                            </td>
-                                            <td>$56.07</td>
-                                            <td>
-                                                <span className="badge bg-success shadow-md dark:group-hover:bg-transparent">Paid</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
 
-                        <div className="panel h-full w-full">
-                            <div className="mb-5 flex items-center justify-between">
-                                <h5 className="text-lg font-semibold dark:text-white-light">Top Selling Product</h5>
-                            </div>
-                            <div className="table-responsive">
-                                <table>
-                                    <thead>
-                                        <tr className="border-b-0">
-                                            <th className="ltr:rounded-l-md rtl:rounded-r-md">Product</th>
-                                            <th>Price</th>
-                                            <th>Discount</th>
-                                            <th>Sold</th>
-                                            <th className="ltr:rounded-r-md rtl:rounded-l-md">Source</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
-                                            <td className="min-w-[150px] text-black dark:text-white">
-                                                <div className="flex">
-                                                    <img className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3" src="/assets/images/product-headphones.jpg" alt="avatar" />
-                                                    <p className="whitespace-nowrap">
-                                                        Headphone
-                                                        <span className="block text-xs text-primary">Digital</span>
-                                                    </p>
-                                                </div>
-                                            </td>
-                                            <td>$168.09</td>
-                                            <td>$60.09</td>
-                                            <td>170</td>
-                                            <td>
-                                                <button type="button" className="flex items-center text-danger">
-                                                    <IconMultipleForwardRight className="ltr:mr-1 rtl:ml-1 rtl:rotate-180" />
-                                                    Direct
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
-                                            <td className="text-black dark:text-white">
-                                                <div className="flex">
-                                                    <img className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3" src="/assets/images/product-shoes.jpg" alt="avatar" />
-                                                    <p className="whitespace-nowrap">
-                                                        Shoes <span className="block text-xs text-warning">Faishon</span>
-                                                    </p>
-                                                </div>
-                                            </td>
-                                            <td>$126.04</td>
-                                            <td>$47.09</td>
-                                            <td>130</td>
-                                            <td>
-                                                <button type="button" className="flex items-center text-success">
-                                                    <IconMultipleForwardRight className="ltr:mr-1 rtl:ml-1 rtl:rotate-180" />
-                                                    Google
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
-                                            <td className="text-black dark:text-white">
-                                                <div className="flex">
-                                                    <img className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3" src="/assets/images/product-watch.jpg" alt="avatar" />
-                                                    <p className="whitespace-nowrap">
-                                                        Watch <span className="block text-xs text-danger">Accessories</span>
-                                                    </p>
-                                                </div>
-                                            </td>
-                                            <td>$56.07</td>
-                                            <td>$20.00</td>
-                                            <td>66</td>
-                                            <td>
-                                                <button type="button" className="flex items-center text-warning">
-                                                    <IconMultipleForwardRight className="ltr:mr-1 rtl:ml-1 rtl:rotate-180" />
-                                                    Ads
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
-                                            <td className="text-black dark:text-white">
-                                                <div className="flex">
-                                                    <img className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3" src="/assets/images/product-laptop.jpg" alt="avatar" />
-                                                    <p className="whitespace-nowrap">
-                                                        Laptop <span className="block text-xs text-primary">Digital</span>
-                                                    </p>
-                                                </div>
-                                            </td>
-                                            <td>$110.00</td>
-                                            <td>$33.00</td>
-                                            <td>35</td>
-                                            <td>
-                                                <button type="button" className="flex items-center text-secondary">
-                                                    <IconMultipleForwardRight className="ltr:mr-1 rtl:ml-1 rtl:rotate-180" />
-                                                    Email
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
-                                            <td className="text-black dark:text-white">
-                                                <div className="flex">
-                                                    <img className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3" src="/assets/images/product-camera.jpg" alt="avatar" />
-                                                    <p className="whitespace-nowrap">
-                                                        Camera <span className="block text-xs text-primary">Digital</span>
-                                                    </p>
-                                                </div>
-                                            </td>
-                                            <td>$56.07</td>
-                                            <td>$26.04</td>
-                                            <td>30</td>
-                                            <td>
-                                                <button type="button" className="flex items-center text-primary">
-                                                    <IconMultipleForwardRight className="ltr:mr-1 rtl:ml-1 rtl:rotate-180" />
-                                                    Referral
-                                                </button>
-                                            </td>
-                                        </tr>
+                                        {materialSolicitation.map((material)=>{
+                                            function statusColor(status: string){
+                                                switch (status) {
+                                                    case 'pendente':
+                                                        return 'bg-warning'
+                                                    case 'autorizado':
+                                                        return 'bg-success'
+                                                    case 'entregue':
+                                                        return 'bg-primary'
+                                                    default:
+                                                        break;
+                                                }
+                                            }
+
+                                            return (
+
+                                            <tr key={material.id} className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
+                                                <td className="min-w-[150px] text-black dark:text-white">
+                                                    <div className="flex items-center">
+                                                        <img className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3" src={`/assets/images/stock/${material.imagem}`} alt="avatar" />
+                                                        <span className="whitespace-nowrap">{material.material}</span>
+                                                    </div>
+                                                </td>
+                                                <td className=""> {material.material} </td>
+                                                <td>
+                                                    {material.solicitante}
+                                                </td>
+                                                <td>{material.dataSolicitacao}</td>
+                                                <td>{material.quantidade}</td>
+                                                <td>
+                                                    <span className={`badge ${statusColor(material.status)} shadow-md dark:group-hover:bg-transparent capitalize`}>{material.status}</span>
+                                                </td>
+                                            </tr>
+                                            )
+                                        })}
+
                                     </tbody>
                                 </table>
                             </div>

@@ -1,56 +1,71 @@
 'use client';
-import IconPlus from '@/components/icon/icon-plus';
-import IconSearch from '@/components/icon/icon-search';
 import IconUser from '@/components/icon/icon-user';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
+import proprieties from '@/database/propriedades.json';
 import stock from '@/database/stock.json';
 
-const ComponentsStock = () => {
-    const [value, setValue] = useState<any>('list');
-
-
+const ComponentsProprietiesDetail = ({ id }: {id: number}) => {
     const [search, setSearch] = useState<any>('');
-    const [contactList] = useState<any>(stock);
+    const [propriety] = useState<any>(proprieties.find(p => p.id === id));
 
-    const [filteredItems, setFilteredItems] = useState<any>(contactList);
-
-    const searchContact = () => {
-        setFilteredItems(() => {
-            return contactList.filter((item: any) => {
-                return item.nome.toLowerCase().includes(search.toLowerCase());
-            });
-        });
-    };
-
-    useEffect(() => {
-        searchContact();
-    }, [search]);
 
     return (
         <div>
-            <div className="flex flex-wrap items-center justify-between gap-4">
-                <h2 className="text-xl">Lista de Materiais</h2>
-                <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
-                    <div className="flex gap-3">
-                        <div>
-                            <button type="button" className="btn btn-primary" >
-                                <IconPlus className="ltr:mr-2 rtl:ml-2" />
-                                Adicionar material
-                            </button>
-                        </div>
+            <div className=" overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]" key={propriety.id}>
+                <div className="flex overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]">
 
+                    <div className=" overflow-hidden p-6">
+                        <img className="mx-auto rounded-md max-h-90 w-full object-cover" src={`/assets/images/propriedades/${propriety.imagem}`} alt="propriety_image" />
                     </div>
-                    <div className="relative">
-                        <input type="text" placeholder="Search Contacts" className="peer form-input py-2 ltr:pr-11 rtl:pl-11" value={search} onChange={(e) => setSearch(e.target.value)} />
-                        <button type="button" className="absolute top-1/2 -translate-y-1/2 peer-focus:text-primary ltr:right-[11px] rtl:left-[11px]">
-                            <IconSearch className="mx-auto" />
-                        </button>
+                    <div className="relative px-6 pb-24">
+                        <div className="mt-6 grid grid-cols-1 gap-4 ltr:text-left rtl:text-right">
+                            <div className="flex items-center">
+                                <div className="truncate text-3xl font-bold text-black">{propriety.nome}</div>
+                            </div>
+                            <div className="flex items-center">
+                                <div className="text-white-dark max-w-xl">{propriety.descricao}</div>
+                            </div>
+                            <div className="flex items-center">
+                                <div className="flex-none ltr:mr-2 rtl:ml-2">Status :</div>
+                                <div className="text-white-dark">{propriety.status}</div>
+                            </div>
+                            <div className="flex items-center">
+                                <div className="flex-none ltr:mr-2 rtl:ml-2">Area :</div>
+                                <div className="text-white-dark">{propriety.area}</div>
+                            </div>
+
+                            <div className="flex items-center">
+                                <div className="flex-none ltr:mr-2 rtl:ml-2">Tipo :</div>
+                                <div className="text-white-dark">{propriety.tipo}</div>
+                            </div>
+
+                            <div className="flex items-center">
+                                <div className="flex-none ltr:mr-2 rtl:ml-2">Andares :</div>
+                                <div className="text-white-dark">{propriety.andares}</div>
+                            </div>
+
+                            <div className="flex items-center">
+                                <div className="flex-none ltr:mr-2 rtl:ml-2">Previsão de entrega :</div>
+                                <div className="text-white-dark">{propriety.previsao_entrega}</div>
+                            </div>
+
+                            <div className="flex items-center">
+                                <div className="flex-none ltr:mr-2 rtl:ml-2">Custo estimado :</div>
+                                <div className="text-white-dark">{propriety.custo_estimado}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            {value === 'list' && (
-                <div className="panel mt-5 overflow-hidden border-0 p-0">
+
+
+            <div className="flex flex-wrap items-center justify-between gap-4 mt-10">
+                <h2 className="text-xl">Lista de Materiais</h2>
+
+            </div>
+
+            <div className="panel mt-5 overflow-hidden border-0 p-0">
                     <div className="table-responsive">
                         <table className="table-striped table-hover">
                             <thead>
@@ -63,7 +78,7 @@ const ComponentsStock = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {filteredItems.map((stock: any) => {
+                                {stock.map((stock: any) => {
                                     return (
                                         <tr key={stock.id}>
                                             <td>
@@ -101,9 +116,8 @@ const ComponentsStock = () => {
                         </table>
                     </div>
                 </div>
-            )}
         </div>
     );
 };
 
-export default ComponentsStock;
+export default ComponentsProprietiesDetail;

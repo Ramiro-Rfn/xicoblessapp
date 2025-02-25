@@ -1,0 +1,20 @@
+[
+    {
+      "id": "1",
+      "material": "Cimento",
+      "quantidade": 50,
+      "status": "pendente",
+      "dataSolicitacao": "2025-02-25",
+      "solicitante": "Condomínio Bela Vista",
+      "imagem": "cimento.jpg"
+    },
+    {
+      "id": "2",
+      "material": "Areia",
+      "quantidade": 30,
+      "status": "autorizado",
+      "dataSolicitacao": "2025-02-24",
+      "solicitante": "Hospital Vida e Saúde",
+      "imagem": "areia.jpg"
+    }
+]

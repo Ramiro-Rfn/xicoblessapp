@@ -1,12 +1,11 @@
-{
-    "materiais": [
+[
       {
         "id": 1,
         "nome": "Cimento",
         "categoria": "Estrutura",
         "unidade": "Saco (50kg)",
         "estoque": 100,
-        "imagem": "https://example.com/imagens/cimento.jpg"
+        "imagem": "cimento.jpg"
       },
       {
         "id": 2,
@@ -14,7 +13,7 @@
         "categoria": "Agregado",
         "unidade": "Metro cúbico",
         "estoque": 50,
-        "imagem": "https://example.com/imagens/areia.jpg"
+        "imagem": "areia.jpg"
       },
       {
         "id": 3,
@@ -22,7 +21,7 @@
         "categoria": "Agregado",
         "unidade": "Metro cúbico",
         "estoque": 30,
-        "imagem": "https://example.com/imagens/brita.jpg"
+        "imagem": "/brita.png"
       },
       {
         "id": 4,
@@ -30,7 +29,7 @@
         "categoria": "Alvenaria",
         "unidade": "Milheiro",
         "estoque": 2000,
-        "imagem": "https://example.com/imagens/tijolo.jpg"
+        "imagem": "tijolo.jpg"
       },
       {
         "id": 5,
@@ -38,15 +37,15 @@
         "categoria": "Alvenaria",
         "unidade": "Unidade",
         "estoque": 500,
-        "imagem": "https://example.com/imagens/bloco_concreto.jpg"
+        "imagem": "bloco.jpg"
       },
       {
         "id": 6,
-        "nome": "Vergalhão",
+        "nome": "Vigas de aço",
         "categoria": "Estrutura",
         "unidade": "Barra (12m)",
         "estoque": 150,
-        "imagem": "https://example.com/imagens/vergalhao.jpg"
+        "imagem": "vigas.png"
       },
       {
         "id": 7,
@@ -54,15 +53,15 @@
         "categoria": "Cobertura",
         "unidade": "Unidade",
         "estoque": 800,
-        "imagem": "https://example.com/imagens/telha_ceramica.jpg"
+        "imagem": "telha.jpg"
       },
       {
         "id": 8,
-        "nome": "Madeira para Construção",
-        "categoria": "Estrutura",
+        "nome": "Porta de madeira",
+        "categoria": "Acabamento",
         "unidade": "Metro",
         "estoque": 300,
-        "imagem": "https://example.com/imagens/madeira.jpg"
+        "imagem": "porta.png"
       },
       {
         "id": 9,
@@ -70,15 +69,15 @@
         "categoria": "Acabamento",
         "unidade": "Lata (18L)",
         "estoque": 60,
-        "imagem": "https://example.com/imagens/tinta_latex.jpg"
+        "imagem": "tinta.png"
       },
       {
         "id": 10,
-        "nome": "Rejunte",
+        "nome": "Janela",
         "categoria": "Acabamento",
-        "unidade": "Saco (1kg)",
+        "unidade": "metro",
         "estoque": 120,
-        "imagem": "https://example.com/imagens/rejunte.jpg"
+        "imagem": "janela.jpg"
       },
       {
         "id": 11,
@@ -86,7 +85,7 @@
         "categoria": "Hidráulica",
         "unidade": "Metro",
         "estoque": 400,
-        "imagem": "https://example.com/imagens/tubos_pvc.jpg"
+        "imagem": "tubo.jpg"
       },
       {
         "id": 12,
@@ -94,7 +93,7 @@
         "categoria": "Elétrica",
         "unidade": "Rolo (100m)",
         "estoque": 250,
-        "imagem": "https://example.com/imagens/fios_eletricos.jpg"
+        "imagem": "fios.jpg"
       }
-    ]
-  }
+]
+
