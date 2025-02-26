@@ -6,9 +6,19 @@ import { useEffect, useState } from 'react';
 
 import stock from '@/database/stock.json';
 
+import { AddSolicitationModal } from '../Solicitation/addSolicitaticonModal';
+
 const ComponentsStock = () => {
     const [value, setValue] = useState<any>('list');
 
+    const [addSolicitationModal, setAddSolicitationModal] = useState(false);
+    const [selectedMaterial, setSelectedMaterial] = useState<number | undefined>(undefined);
+
+    function ChangeModalStatus(value: boolean, selectedMaterialId?: number) {
+        setAddSolicitationModal(value)
+
+        setSelectedMaterial(selectedMaterialId)
+    }
 
     const [search, setSearch] = useState<any>('');
     const [contactList] = useState<any>(stock);
@@ -89,9 +99,11 @@ const ComponentsStock = () => {
                                             <td className="whitespace-nowrap">{stock.estoque}</td>
                                             <td>
                                                 <div className="flex items-center justify-center gap-4">
-                                                    <button type="button" className="btn btn-sm btn-outline-primary">
+                                                    <button onClick={()=> ChangeModalStatus(true, stock.id)} type="button" className="btn btn-sm btn-outline-primary">
                                                         Solicitar
                                                     </button>
+
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -99,6 +111,12 @@ const ComponentsStock = () => {
                                 })}
                             </tbody>
                         </table>
+
+                        <AddSolicitationModal
+                            openSolicitationModal={addSolicitationModal}
+                            setOpenSolicitationModal={ChangeModalStatus}
+                            selectedMaterial={selectedMaterial}
+                        />
                     </div>
                 </div>
             )}

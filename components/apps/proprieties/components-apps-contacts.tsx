@@ -10,7 +10,7 @@ import proprieties from '@/database/propriedades.json';
 import Link from 'next/link';
 
 const ComponentsProprieties = () => {
-    const [value, setValue] = useState<any>('list');
+    const [value, setValue] = useState<any>('grid');
 
     const [search, setSearch] = useState<any>('');
     const [proprietiesList] = useState<any>(proprieties);

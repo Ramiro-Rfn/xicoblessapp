@@ -9,6 +9,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useDispatch, useSelector } from 'react-redux';
+import IconHome from '../icon/icon-home';
 import IconShoppingCart from '../icon/icon-shopping-cart';
 import IconMenuDatatables from '../icon/menu/icon-menu-datatables';
 import IconMenuUsers from '../icon/menu/icon-menu-users';
@@ -98,7 +99,7 @@ const Sidebar = () => {
                                     <li className="nav-item">
                                         <Link href="/propriedades" className="group">
                                             <div className="flex items-center">
-                                                <IconMenuDatatables className="shrink-0 group-hover:!text-primary" />
+                                                <IconHome className="shrink-0 group-hover:!text-primary" />
                                                 <span className="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">{t('Propriedades')}</span>
                                             </div>
                                         </Link>
