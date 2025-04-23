@@ -1,9 +1,8 @@
 'use client';
 import { useState } from 'react';
 
-import executionPhases from '@/database/execution_phase.json';
 import proprieties from '@/database/propriedades.json';
-import Link from 'next/link';
+import Tasks from '@/database/tasks.json';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
@@ -16,45 +15,40 @@ const ComponentsProprietiesDetail = ({ id }: {id: number}) => {
     return (
         <div>
             <div className=" overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]" key={propriety.id}>
+
                 <div className="flex overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]">
-                    <div className=" overflow-hidden p-6">
-                        <img className="mx-auto rounded-md max-h-90 w-full object-cover" src={`/assets/images/propriedades/${propriety.imagem}`} alt="propriety_image" />
-                    </div>
-                    <div className="relative px-6 pb-24">
-                        <div className="mt-6 grid grid-cols-1 gap-4 ltr:text-left rtl:text-right">
-                            <div className="flex items-center">
-                                <div className="truncate text-3xl font-bold text-black">{propriety.nome}</div>
-                            </div>
-                            <div className="flex items-center">
-                                <div className="text-white-dark max-w-xl">{propriety.descricao}</div>
-                            </div>
-                            <div className="flex items-center">
-                                <div className="flex-none ltr:mr-2 rtl:ml-2">Status :</div>
-                                <div className="text-white-dark">{propriety.status}</div>
-                            </div>
-                            <div className="flex items-center">
-                                <div className="flex-none ltr:mr-2 rtl:ml-2">Area :</div>
-                                <div className="text-white-dark">{propriety.area}</div>
-                            </div>
 
-                            <div className="flex items-center">
-                                <div className="flex-none ltr:mr-2 rtl:ml-2">Tipo :</div>
-                                <div className="text-white-dark">{propriety.tipo}</div>
-                            </div>
 
-                            <div className="flex items-center">
-                                <div className="flex-none ltr:mr-2 rtl:ml-2">Andares :</div>
-                                <div className="text-white-dark">{propriety.andares}</div>
-                            </div>
 
-                            <div className="flex items-center">
-                                <div className="flex-none ltr:mr-2 rtl:ml-2">Previsão de entrega :</div>
-                                <div className="text-white-dark">{propriety.previsao_entrega}</div>
-                            </div>
+                    <div className="relative px-6 py-6">
+                        <div className="flex mb-4 items-center">
+                            <div className="truncate text-3xl font-bold text-black">Fundação</div>
+                        </div>
 
+                        <div className='flex gap-8'>
                             <div className="flex items-center">
-                                <div className="flex-none ltr:mr-2 rtl:ml-2">Custo estimado :</div>
-                                <div className="text-white-dark">{propriety.custo_estimado}</div>
+                                <div className="w-32">
+                                    <CircularProgressbar value={79} text={`${79}%`} />
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-2 gap-4 ltr:text-left rtl:text-right">
+                                <div className="flex flex-col justify-center">
+                                    <p className="flex-none text-lg ltr:mr-2 rtl:ml-2">Tempo Estimado:</p>
+                                    <h4 className="text-dark text-lg font-bold">14/10/24 - 21/10/25</h4>
+                                </div>
+                                <div className="flex flex-col justify-center">
+                                    <p className="flex-none text-lg ltr:mr-2 rtl:ml-2">Tempo real:</p>
+                                    <h4 className="text-dark text-lg font-bold">14/10/24 - 21/10/25</h4>
+                                </div>
+                                <div className="flex flex-col justify-center">
+                                    <p className="flex-none text-lg ltr:mr-2 rtl:ml-2">Custo Estimado:</p>
+                                    <h4 className="text-dark text-3xl font-bold">100.000 kz</h4>
+                                </div>
+
+                                <div className="flex flex-col justify-center">
+                                    <p className="flex-none text-lg ltr:mr-2 rtl:ml-2">Custo real:</p>
+                                    <h4 className="text-dark text-3xl font-bold">150.000 kz</h4>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -63,7 +57,7 @@ const ComponentsProprietiesDetail = ({ id }: {id: number}) => {
 
 
             <div className="flex flex-wrap items-center justify-between gap-4 mt-10">
-                <h2 className="text-xl">Etapas da obra</h2>
+                <h2 className="text-xl">Tarefas</h2>
 
             </div>
 
@@ -77,21 +71,21 @@ const ComponentsProprietiesDetail = ({ id }: {id: number}) => {
                                     <th>Nome</th>
                                     <th>Data início</th>
                                     <th>Data início</th>
-                                    <th>Custo estimado</th>
+                                    <th>Responsável</th>
                                     <th>Progresso</th>
                                     <th>Status</th>
                                     <th className="!text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {executionPhases.map((stock) => {
+                                {Tasks.map((stock) => {
                                     return (
                                         <tr key={stock.id}>
-                                            <td>{stock.sequence_order}</td>
+                                            <td>{stock.id}</td>
                                             <td>{stock.name}</td>
                                             <td className="whitespace-nowrap">{stock.start_date}</td>
                                             <td className="whitespace-nowrap">{stock.end_date}</td>
-                                            <td className="whitespace-nowrap">{stock.estimated_cost}</td>
+                                            <td className="whitespace-nowrap">{stock.assigned_to}</td>
                                             <td className="whitespace-nowrap">
                                                 <div className='w-8'>
                                                     <CircularProgressbar value={stock.progress} text={`${stock.progress}%`} />
@@ -102,11 +96,9 @@ const ComponentsProprietiesDetail = ({ id }: {id: number}) => {
                                             </td>
                                             <td>
                                                 <div className="flex items-center justify-center gap-4">
-                                                    <Link href="/propriedades/etapas/1">
-                                                        <button type="button" className="btn btn-sm btn-outline-primary">
-                                                            Ver
-                                                        </button>
-                                                    </Link>
+                                                    <button type="button" className="btn btn-sm btn-outline-primary">
+                                                        Ver
+                                                    </button>
                                                     <button type="button" className="btn btn-sm btn-outline-success">
                                                         Editar
                                                     </button>
