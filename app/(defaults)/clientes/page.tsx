@@ -3,15 +3,13 @@ import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 
 export const metadata: Metadata = {
-    title: 'Contacts',
+    title: 'Clientes',
 };
 
 const Contacts = async () => {
     const cookie = cookies().get("xicobless_token");
 
     const TOKEN = cookie?.value
-
-    console.log(TOKEN)
 
     const customersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/customers/all`, {
         headers: {
@@ -21,8 +19,6 @@ const Contacts = async () => {
     })
 
     const customers = await customersResponse.json()
-
-    console.log(customers)
 
     return <ComponentsAppsContacts customers={customers} />;
 };

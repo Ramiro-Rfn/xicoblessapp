@@ -1,61 +1,65 @@
 'use client';
-import { useState } from 'react';
 
 import executionPhases from '@/database/execution_phase.json';
-import proprieties from '@/database/propriedades.json';
+import { differenceInCalendarWeeks } from 'date-fns';
 import Link from 'next/link';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
+type Project = {
+    id: string
+    name: string
+    location: string
+    description: string
+    type: string
+    geoCoordinates: string
+    status: string
+    startDate: Date
+    endDate: Date
+    customerId: string
+}
 
-const ComponentsProprietiesDetail = ({ id }: {id: number}) => {
-    const [search, setSearch] = useState<any>('');
-    const [propriety] = useState<any>(proprieties.find(p => p.id === id));
+interface ProjectDetailProps {
+    project: Project
+}
 
+const ComponentsProprietiesDetail = ({ project }: ProjectDetailProps) => {
 
     return (
         <div>
-            <div className=" overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]" key={propriety.id}>
+            <div className=" overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]" key={project.id}>
                 <div className="flex overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]">
                     <div className=" overflow-hidden p-6">
-                        <img className="mx-auto rounded-md max-h-90 w-full object-cover" src={`/assets/images/propriedades/${propriety.imagem}`} alt="propriety_image" />
+                        <img className="mx-auto rounded-md max-h-90 w-full object-cover" src={`/assets/images/default-home-cover.png`} alt="propriety_image" />
                     </div>
                     <div className="relative px-6 pb-24">
                         <div className="mt-6 grid grid-cols-1 gap-4 ltr:text-left rtl:text-right">
                             <div className="flex items-center">
-                                <div className="truncate text-3xl font-bold text-black">{propriety.nome}</div>
+                                <div className="truncate text-3xl font-bold text-black">{project.name}</div>
                             </div>
                             <div className="flex items-center">
-                                <div className="text-white-dark max-w-xl">{propriety.descricao}</div>
+                                <div className="text-white-dark max-w-xl">{project.description}</div>
                             </div>
                             <div className="flex items-center">
                                 <div className="flex-none ltr:mr-2 rtl:ml-2">Status :</div>
-                                <div className="text-white-dark">{propriety.status}</div>
-                            </div>
-                            <div className="flex items-center">
-                                <div className="flex-none ltr:mr-2 rtl:ml-2">Area :</div>
-                                <div className="text-white-dark">{propriety.area}</div>
+                                <div className="text-white-dark">{project.status}</div>
                             </div>
 
                             <div className="flex items-center">
                                 <div className="flex-none ltr:mr-2 rtl:ml-2">Tipo :</div>
-                                <div className="text-white-dark">{propriety.tipo}</div>
+                                <div className="text-white-dark">{project.type}</div>
                             </div>
 
                             <div className="flex items-center">
-                                <div className="flex-none ltr:mr-2 rtl:ml-2">Andares :</div>
-                                <div className="text-white-dark">{propriety.andares}</div>
+                                <div className="flex-none ltr:mr-2 rtl:ml-2">Localização:</div>
+                                <div className="text-white-dark">{project.location}</div>
                             </div>
 
                             <div className="flex items-center">
                                 <div className="flex-none ltr:mr-2 rtl:ml-2">Previsão de entrega :</div>
-                                <div className="text-white-dark">{propriety.previsao_entrega}</div>
+                                <div className="text-white-dark">{differenceInCalendarWeeks(new Date(project.endDate), new Date(project.startDate))} Semanas</div>
                             </div>
 
-                            <div className="flex items-center">
-                                <div className="flex-none ltr:mr-2 rtl:ml-2">Custo estimado :</div>
-                                <div className="text-white-dark">{propriety.custo_estimado}</div>
-                            </div>
                         </div>
                     </div>
                 </div>
