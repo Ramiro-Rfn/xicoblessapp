@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     title: 'Propriedades',
 };
 
-async function Contacts({ params}: {params: {id: string}}){
+async function Contacts({ params}: {params: { id: string }}){
     const cookie = cookies().get("xicobless_token");
 
     const TOKEN = cookie?.value
@@ -20,10 +20,18 @@ async function Contacts({ params}: {params: {id: string}}){
 
     const project = await projectResponse.json()
 
-    console.log(project)
+    const phasesResponse = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/phases/all/${project.id}`, {
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${TOKEN}`,
+        }
+    })
 
-    const id: number = Number(params?.id)
-    return <ComponentsProprietiesDetail project={project} />;
+    const phases = await phasesResponse.json()
+
+    console.log(phases)
+
+    return <ComponentsProprietiesDetail project={project} phases={phases} />;
 };
 
 export default Contacts;

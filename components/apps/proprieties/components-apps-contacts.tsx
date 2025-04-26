@@ -1,8 +1,8 @@
 'use client';
 import IconSearch from '@/components/icon/icon-search';
-import IconUserPlus from '@/components/icon/icon-user-plus';
 import { Fragment, useState } from 'react';
 
+import IconPlus from '@/components/icon/icon-plus';
 import IconX from '@/components/icon/icon-x';
 import { Dialog, Transition } from '@headlessui/react';
 import { differenceInCalendarWeeks } from 'date-fns';
@@ -47,8 +47,8 @@ const ComponentsProprieties = ({ projects }: ProprietiesProjectProps) => {
                     <div className="flex gap-3">
                         <div>
                             <button type="button" className="btn btn-primary" onClick={handleAddCustomer}>
-                                <IconUserPlus className="ltr:mr-2 rtl:ml-2" />
-                                Add propriety
+                                <IconPlus className="ltr:mr-2 rtl:ml-2" />
+                                Adicionar Projecto
                             </button>
                         </div>
                     </div>

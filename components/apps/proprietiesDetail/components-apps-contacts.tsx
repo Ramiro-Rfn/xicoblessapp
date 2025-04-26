@@ -1,10 +1,10 @@
 'use client';
 
-import executionPhases from '@/database/execution_phase.json';
-import { differenceInCalendarWeeks } from 'date-fns';
+import { differenceInCalendarWeeks, format } from 'date-fns';
 import Link from 'next/link';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { CreatePhaseModal } from './CreatePhaseModal';
 
 type Project = {
     id: string
@@ -19,11 +19,22 @@ type Project = {
     customerId: string
 }
 
-interface ProjectDetailProps {
-    project: Project
+type Phase = {
+    id: string
+    name: string
+    sequenceOrder: number
+    startDate: Date
+    endDate: Date
+    status: string
+    estimatedCost: number
 }
 
-const ComponentsProprietiesDetail = ({ project }: ProjectDetailProps) => {
+interface ProjectDetailProps {
+    project: Project
+    phases: Phase[]
+}
+
+const ComponentsProprietiesDetail = ({ project, phases }: ProjectDetailProps) => {
 
     return (
         <div>
@@ -68,7 +79,7 @@ const ComponentsProprietiesDetail = ({ project }: ProjectDetailProps) => {
 
             <div className="flex flex-wrap items-center justify-between gap-4 mt-10">
                 <h2 className="text-xl">Etapas da obra</h2>
-
+                <CreatePhaseModal projectId={project.id} />
             </div>
 
             <div className="panel mt-5 overflow-hidden border-0 p-0">
@@ -88,21 +99,23 @@ const ComponentsProprietiesDetail = ({ project }: ProjectDetailProps) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {executionPhases.map((stock) => {
+                                {phases.map((phase) => {
                                     return (
-                                        <tr key={stock.id}>
-                                            <td>{stock.sequence_order}</td>
-                                            <td>{stock.name}</td>
-                                            <td className="whitespace-nowrap">{stock.start_date}</td>
-                                            <td className="whitespace-nowrap">{stock.end_date}</td>
-                                            <td className="whitespace-nowrap">{stock.estimated_cost}</td>
+                                        <tr key={phase.id}>
+                                            <td>{phase.sequenceOrder}</td>
+                                            <td>{phase.name}</td>
+                                            <td className="whitespace-nowrap">{format(new Date(phase.startDate), "dd/MM/yyyy") }</td>
+                                            <td className="whitespace-nowrap">{format(new Date(phase.endDate), "dd/MM/yyyy")}</td>
+                                            <td className="whitespace-nowrap">{Intl.NumberFormat('pt', {
+                                                currency: 'AOA'
+                                            }).format(phase.estimatedCost) } kz</td>
                                             <td className="whitespace-nowrap">
                                                 <div className='w-8'>
-                                                    <CircularProgressbar value={stock.progress} text={`${stock.progress}%`} />
+                                                    <CircularProgressbar value={70} text={`${70}%`} />
                                                 </div>
                                             </td>
                                             <td className={"whitespace-nowrap capitalize"} >
-                                                <span className='badge badge-outline-primary'>{stock.status}</span>
+                                                <span className='badge badge-outline-primary'>{phase.status}</span>
                                             </td>
                                             <td>
                                                 <div className="flex items-center justify-center gap-4">
