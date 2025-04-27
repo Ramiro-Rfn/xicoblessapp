@@ -4,13 +4,10 @@ import IconPlus from "@/components/icon/icon-plus";
 import IconX from "@/components/icon/icon-x";
 import { Dialog, Transition, } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import { CreatePhaseForm } from "./createPhaseform";
+import { CreateMaterialForm } from "./createMaterialform";
 
-interface CreatePhaseModalProps {
-    projectId: string
-}
 
-export function CreatePhaseModal({ projectId }: CreatePhaseModalProps) {
+export function CreateMaterialModal() {
     const [addContactModal, setAddContactModal] = useState<any>(false);
 
 
@@ -24,10 +21,10 @@ export function CreatePhaseModal({ projectId }: CreatePhaseModalProps) {
 
     return (
         <div>
-            <div className="flex flex-wrap items-center justify-between gap-4 mt-10">
+            <div className="flex flex-wrap items-center justify-between gap-4">
                 <button type="button" className="btn btn-primary" onClick={handleAddPhase}>
                     <IconPlus className="ltr:mr-2 rtl:ml-2" />
-                    Nova Etapa
+                    Novo material
                 </button>
             </div>
             <Transition appear show={addContactModal} as={Fragment}>
@@ -58,7 +55,7 @@ export function CreatePhaseModal({ projectId }: CreatePhaseModalProps) {
                                         Adicionar Fase
                                     </div>
                                     <div className="p-5">
-                                        <CreatePhaseForm projectId={projectId} closeModal={handleCloseModal} />
+                                        <CreateMaterialForm closeModal={handleCloseModal} />
                                     </div>
                                 </Dialog.Panel>
                             </Transition.Child>

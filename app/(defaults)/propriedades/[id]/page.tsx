@@ -29,8 +29,6 @@ async function Contacts({ params}: {params: { id: string }}){
 
     const phases = await phasesResponse.json()
 
-    console.log(phases)
-
     return <ComponentsProprietiesDetail project={project} phases={phases} />;
 };
 

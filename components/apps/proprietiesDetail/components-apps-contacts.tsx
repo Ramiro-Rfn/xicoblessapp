@@ -1,10 +1,16 @@
 'use client';
 
+import { revalidateData } from '@/app/action/revalidateData';
+import IconEye from '@/components/icon/icon-eye';
+import IconTrashLines from '@/components/icon/icon-trash-lines';
+import { api } from '@/services/axios';
 import { differenceInCalendarWeeks, format } from 'date-fns';
 import Link from 'next/link';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import Swal from 'sweetalert2';
 import { CreatePhaseModal } from './CreatePhaseModal';
+import { EditPhaseModal } from './EditPhaseModal';
 
 type Project = {
     id: string
@@ -26,6 +32,7 @@ type Phase = {
     startDate: Date
     endDate: Date
     status: string
+    projectId: string
     estimatedCost: number
 }
 
@@ -35,6 +42,34 @@ interface ProjectDetailProps {
 }
 
 const ComponentsProprietiesDetail = ({ project, phases }: ProjectDetailProps) => {
+    const showMessage = (msg = '', type = 'success') => {
+        const toast: any = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000,
+            customClass: { container: 'toast' },
+        });
+        toast.fire({
+            icon: type,
+            title: msg,
+            padding: '10px 20px',
+        });
+    };
+
+    async function deletePhase(phaseId: string, projectId: string) {
+        try {
+            await api.delete(`phase/delete/${phaseId}`)
+
+            showMessage('Fase Apagada')
+
+            revalidateData(`propriedades/${projectId}`)
+        } catch (error) {
+            showMessage('Erro ao apagar fase')
+
+            console.log(error)
+        }
+    }
 
     return (
         <div>
@@ -117,15 +152,19 @@ const ComponentsProprietiesDetail = ({ project, phases }: ProjectDetailProps) =>
                                             <td className={"whitespace-nowrap capitalize"} >
                                                 <span className='badge badge-outline-primary'>{phase.status}</span>
                                             </td>
-                                            <td>
+                                            <td className='flex justify-end'>
                                                 <div className="flex items-center justify-center gap-4">
-                                                    <Link href="/propriedades/etapas/1">
-                                                        <button type="button" className="btn btn-sm btn-outline-primary">
-                                                            Ver
+                                                    <Link href={`/propriedades/etapas/${phase.id}`}>
+                                                        <button type="button" className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2">
+
+                                                            <IconEye className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" />
                                                         </button>
                                                     </Link>
-                                                    <button type="button" className="btn btn-sm btn-outline-success">
-                                                        Editar
+
+                                                    <EditPhaseModal phase={phase}  />
+
+                                                    <button type="button" onClick={() => deletePhase(phase.id, phase.projectId)}>
+                                                        <IconTrashLines className="shrink-0 ltr:mr-2 rtl:ml-2" />
                                                     </button>
                                                 </div>
                                             </td>

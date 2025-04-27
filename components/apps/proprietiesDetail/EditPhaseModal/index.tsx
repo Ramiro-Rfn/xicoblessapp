@@ -1,16 +1,27 @@
 'use client'
 
-import IconPlus from "@/components/icon/icon-plus";
+import IconPencilPaper from "@/components/icon/icon-pencil-paper";
 import IconX from "@/components/icon/icon-x";
 import { Dialog, Transition, } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import { CreatePhaseForm } from "./createPhaseform";
+import { CreatePhaseForm } from "./editPhaseform";
 
-interface CreatePhaseModalProps {
+type Phase = {
+    id: string
+    name: string
+    sequenceOrder: number
+    startDate: Date
+    endDate: Date
     projectId: string
+    status: string
+    estimatedCost: number
 }
 
-export function CreatePhaseModal({ projectId }: CreatePhaseModalProps) {
+interface CreatePhaseModalProps {
+    phase: Phase
+}
+
+export function EditPhaseModal({ phase }: CreatePhaseModalProps) {
     const [addContactModal, setAddContactModal] = useState<any>(false);
 
 
@@ -24,10 +35,9 @@ export function CreatePhaseModal({ projectId }: CreatePhaseModalProps) {
 
     return (
         <div>
-            <div className="flex flex-wrap items-center justify-between gap-4 mt-10">
-                <button type="button" className="btn btn-primary" onClick={handleAddPhase}>
-                    <IconPlus className="ltr:mr-2 rtl:ml-2" />
-                    Nova Etapa
+            <div className="flex flex-wrap items-center justify-between gap-4">
+                <button type="button" onClick={handleAddPhase}>
+                    <IconPencilPaper className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" />
                 </button>
             </div>
             <Transition appear show={addContactModal} as={Fragment}>
@@ -58,7 +68,7 @@ export function CreatePhaseModal({ projectId }: CreatePhaseModalProps) {
                                         Adicionar Fase
                                     </div>
                                     <div className="p-5">
-                                        <CreatePhaseForm projectId={projectId} closeModal={handleCloseModal} />
+                                        <CreatePhaseForm phase={phase} closeModal={handleCloseModal} />
                                     </div>
                                 </Dialog.Panel>
                             </Transition.Child>

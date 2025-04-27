@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão de Materiais da Obra</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+    header {
+      background: #004aad;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+    }
+    table {
+      width: 100%;
+      background: white;
+      border-collapse: collapse;
+      margin-top: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background: #e3e3e3;
+    }
+    .stock-low {
+      background-color: #ffcccc;
+    }
+    .stock-ok {
+      background-color: #ccffcc;
+    }
+    .actions button {
+      padding: 6px 10px;
+      margin: 2px;
+      border: none;
+      background-color: #004aad;
+      color: white;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .actions button:hover {
+      background-color: #003080;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Gestão de Materiais da Obra</h1>
+</header>
+
+<section>
+  <table>
+    <thead>
+      <tr>
+        <th>Material</th>
+        <th>Quantidade Atual</th>
+        <th>Quantidade Mínima</th>
+        <th>Preço Unitário (Kz)</th>
+        <th>Total em Stock (Kz)</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cimento</td>
+        <td>50</td>
+        <td>30</td>
+        <td>4.500</td>
+        <td>225.000</td>
+        <td class="stock-ok">Ok</td>
+        <td class="actions">
+          <button>Editar</button>
+          <button>Requisitar</button>
+        </td>
+      </tr>
+      <tr>
+        <td>Tijolo</td>
+        <td>20</td>
+        <td>50</td>
+        <td>150</td>
+        <td>3.000</td>
+        <td class="stock-low">Baixo</td>
+        <td class="actions">
+          <button>Editar</button>
+          <button>Requisitar</button>
+        </td>
+      </tr>
+      <tr>
+        <td>Aço</td>
+        <td>100</td>
+        <td>40</td>
+        <td>8.000</td>
+        <td>800.000</td>
+        <td class="stock-ok">Ok</td>
+        <td class="actions">
+          <button>Editar</button>
+          <button>Requisitar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+</body>
+</html>

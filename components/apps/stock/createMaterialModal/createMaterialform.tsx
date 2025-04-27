@@ -1,4 +1,3 @@
-import { revalidateData } from '@/app/action/revalidateData';
 import { api } from '@/services/axios';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -7,29 +6,28 @@ import Swal from 'sweetalert2';
 import * as yup from 'yup';
 
 const schema = yup.object({
-    name: yup.string(),
-    sequenceOrder: yup.number(),
-    estimatedCost: yup.number(),
-    startDate: yup.date(),
-    endDate: yup.date(),
+    reference: yup.string().min(2),
+    name: yup.string().trim().min(2),
+    unit: yup.string().trim().min(1), // Você pode depois transformar isso numa enum de unidades permitidas
+    unitCost: yup.number().positive(),
+    stockQuantity: yup.number().positive(),
 })
 
 
 type FormData = {
     name: string
-    sequenceOrder: number
-    startDate: Date
-    endDate: Date
-    estimatedCost: number
+    reference: string
+    unit: string
+    unitCost: number
+    stockQuantity: number
 }
 
 
 interface FormProps {
     closeModal: ()=> void
-    projectId: string
 }
 
-export function CreatePhaseForm({ closeModal, projectId }: FormProps) {
+export function CreateMaterialForm({ closeModal }: FormProps) {
 
     const {
         handleSubmit,
@@ -58,20 +56,19 @@ export function CreatePhaseForm({ closeModal, projectId }: FormProps) {
 
 
         try {
-            const response = await  api.post(`/phase/create/${projectId}`, {
+            const response = await  api.post(`/material/create`, {
                 name: data.name,
-                sequence_order: data.sequenceOrder,
-                start_date: new Date(data.startDate),
-                end_date: new Date(data.endDate),
-                estimated_cost: data.estimatedCost
+                reference: data.reference,
+                unit: data.unit,
+                unitCost: data.unitCost,
+                stockQuantity: data.stockQuantity
             })
 
             console.log(response)
 
-            showMessage('Fase Criado com sucesso!')
-            revalidateData(`propriedades/${projectId}`)
+            showMessage('Material Cadastrar com sucesso!')
         } catch (error) {
-            showMessage('Erro ao criar Fase!', 'error')
+            showMessage('Erro ao cadastrar Material!', 'error')
             console.log(error)
         }
     }
@@ -80,29 +77,29 @@ export function CreatePhaseForm({ closeModal, projectId }: FormProps) {
         <form onSubmit={handleSubmit(handleSubmitForm)}>
             <div className="mb-5">
                 <label htmlFor="name">Nome</label>
-                <input {...register('name')} id="name" type="text" placeholder="Digite o nome da fase" className="form-input"  />
+                <input {...register('name')} id="name" type="text" placeholder="Digite o nome do material" className="form-input"  />
             </div>
 
             <div className="mb-5">
-                <label htmlFor="sequenceOrder">Ordem de execução</label>
-                <input {...register('sequenceOrder')} id="sequenceOrder" type="number" placeholder="Digite a ordem de execução" className="form-input"  />
-            </div>
-
-            <div className='grid grid-cols-2 gap-4'>
-                <div className="mb-5">
-                    <label htmlFor="address">Data de início</label>
-                    <input {...register('startDate')} id="address" type="date" placeholder="Digite o endereço" className="form-input" />
-                </div>
-                <div className="mb-5">
-                    <label htmlFor="endDate">Data de término</label>
-                    <input {...register('endDate')} id="endDate" type="date" className="form-input" />
-                </div>
+                <label htmlFor="reference">Referência</label>
+                <input {...register('reference')} id="reference" type="text" placeholder="Digite a referência" className="form-input"  />
             </div>
 
             <div className="mb-5">
-                <label htmlFor="estimatedCost">Custo Estimado</label>
-                <input {...register('estimatedCost')} id="estimatedCost" type="number" placeholder='Digite o custo estimado' className="form-input" />
+                <label htmlFor="unit">Unidade</label>
+                <input {...register('unit')} id="unid" type="text" placeholder="Digite a unidade" className="form-input" />
             </div>
+
+            <div className="mb-5">
+                <label htmlFor="stockQuantity">Quantidade</label>
+                <input {...register("stockQuantity")} id="stockQuantity" placeholder='Digite a quantidade' type="number" className="form-input" />
+            </div>
+
+            <div className="mb-5">
+                <label htmlFor="unitCost">Preço unitário</label>
+                <input {...register("unitCost")} id="unitCost" placeholder='Digite o preço unitário' type="number" className="form-input" />
+            </div>
+
             <div className="mt-8 flex items-center justify-end">
                 <button type="button" className="btn btn-outline-danger" onClick={closeModal}>
                     Cancelar

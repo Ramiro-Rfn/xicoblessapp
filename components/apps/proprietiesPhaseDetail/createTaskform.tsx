@@ -8,8 +8,7 @@ import * as yup from 'yup';
 
 const schema = yup.object({
     name: yup.string(),
-    sequenceOrder: yup.number(),
-    estimatedCost: yup.number(),
+    assignedTo: yup.string(),
     startDate: yup.date(),
     endDate: yup.date(),
 })
@@ -17,19 +16,18 @@ const schema = yup.object({
 
 type FormData = {
     name: string
-    sequenceOrder: number
+    assignedTo: string
     startDate: Date
     endDate: Date
-    estimatedCost: number
 }
 
 
 interface FormProps {
     closeModal: ()=> void
-    projectId: string
+    phaseId: string
 }
 
-export function CreatePhaseForm({ closeModal, projectId }: FormProps) {
+export function CreateTaskForm({ closeModal, phaseId }: FormProps) {
 
     const {
         handleSubmit,
@@ -58,20 +56,21 @@ export function CreatePhaseForm({ closeModal, projectId }: FormProps) {
 
 
         try {
-            const response = await  api.post(`/phase/create/${projectId}`, {
+            const response = await  api.post(`/task/create/${phaseId}`, {
                 name: data.name,
-                sequence_order: data.sequenceOrder,
+                assigned_to: data.assignedTo,
                 start_date: new Date(data.startDate),
                 end_date: new Date(data.endDate),
-                estimated_cost: data.estimatedCost
             })
 
             console.log(response)
 
-            showMessage('Fase Criado com sucesso!')
-            revalidateData(`propriedades/${projectId}`)
+            showMessage('Tarefa Criado com sucesso!')
+
+
+            revalidateData(`propriedades/etapas/${phaseId}`)
         } catch (error) {
-            showMessage('Erro ao criar Fase!', 'error')
+            showMessage('Erro ao criar Tarefa!', 'error')
             console.log(error)
         }
     }
@@ -80,12 +79,12 @@ export function CreatePhaseForm({ closeModal, projectId }: FormProps) {
         <form onSubmit={handleSubmit(handleSubmitForm)}>
             <div className="mb-5">
                 <label htmlFor="name">Nome</label>
-                <input {...register('name')} id="name" type="text" placeholder="Digite o nome da fase" className="form-input"  />
+                <input {...register('name')} id="name" type="text" placeholder="Digite o nome da tarefa" className="form-input"  />
             </div>
 
             <div className="mb-5">
-                <label htmlFor="sequenceOrder">Ordem de execução</label>
-                <input {...register('sequenceOrder')} id="sequenceOrder" type="number" placeholder="Digite a ordem de execução" className="form-input"  />
+                <label htmlFor="assignedTo">Responsável</label>
+                <input {...register('assignedTo')} id="assignedTo" type="text" placeholder="Digite o nome do responsável" className="form-input"  />
             </div>
 
             <div className='grid grid-cols-2 gap-4'>
@@ -99,10 +98,7 @@ export function CreatePhaseForm({ closeModal, projectId }: FormProps) {
                 </div>
             </div>
 
-            <div className="mb-5">
-                <label htmlFor="estimatedCost">Custo Estimado</label>
-                <input {...register('estimatedCost')} id="estimatedCost" type="number" placeholder='Digite o custo estimado' className="form-input" />
-            </div>
+
             <div className="mt-8 flex items-center justify-end">
                 <button type="button" className="btn btn-outline-danger" onClick={closeModal}>
                     Cancelar

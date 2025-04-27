@@ -1,25 +1,79 @@
 'use client';
-import { useState } from 'react';
 
-import proprieties from '@/database/propriedades.json';
-import Tasks from '@/database/tasks.json';
+import { revalidateData } from '@/app/action/revalidateData';
+import IconEye from '@/components/icon/icon-eye';
+import IconTrashLines from '@/components/icon/icon-trash-lines';
+import { api } from '@/services/axios';
+import { format } from 'date-fns';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import Swal from 'sweetalert2';
+import { CreatePhaseModal } from './CreateTaskModal';
+import { EditTaskModal } from './EditTaskModal';
+
+type Phase = {
+    id: string
+    name: string
+    sequenceOrder: number
+    startDate: Date
+    endDate: Date
+    status: string
+    estimatedCost: number
+}
 
 
-const ComponentsProprietiesDetail = ({ id }: {id: number}) => {
-    const [search, setSearch] = useState<any>('');
-    const [propriety] = useState<any>(proprieties.find(p => p.id === id));
+type Task = {
+    id: string
+    name: string
+    assignedTo: string
+    startDate: Date
+    endDate: Date
+    executionPhaseId: string
+    progress: number,
+    status: string
+}
 
+interface PhaseDetailProps {
+    phase: Phase
+    tasks: Task[]
+}
+
+const ComponentsProprietiesDetail = ({ phase, tasks }: PhaseDetailProps) => {
+
+    const showMessage = (msg = '', type = 'success') => {
+        const toast: any = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000,
+            customClass: { container: 'toast' },
+        });
+        toast.fire({
+            icon: type,
+            title: msg,
+            padding: '10px 20px',
+        });
+    };
+
+    async function deleteTask(taskId: string, executionPhaseId: string) {
+        try {
+            await api.delete(`task/delete/${taskId}`)
+
+            showMessage('Tarefa Apagada')
+
+            revalidateData(`propriedades/etapas/${executionPhaseId}`)
+        } catch (error) {
+            showMessage('Erro ao apagar tarefa')
+
+            console.log(error)
+        }
+    }
 
     return (
         <div>
-            <div className=" overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]" key={propriety.id}>
+            <div className=" overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]">
 
                 <div className="flex overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]">
-
-
-
                     <div className="relative px-6 py-6">
                         <div className="flex mb-4 items-center">
                             <div className="truncate text-3xl font-bold text-black">Fundação</div>
@@ -34,20 +88,26 @@ const ComponentsProprietiesDetail = ({ id }: {id: number}) => {
                             <div className="grid grid-cols-2 gap-4 ltr:text-left rtl:text-right">
                                 <div className="flex flex-col justify-center">
                                     <p className="flex-none text-lg ltr:mr-2 rtl:ml-2">Tempo Estimado:</p>
-                                    <h4 className="text-dark text-lg font-bold">14/10/24 - 21/10/25</h4>
+                                    <h4 className="text-dark text-lg font-bold">
+                                        {format(new Date(phase.startDate), "dd/MM/yyyy") } - {format(new Date(phase.startDate), "dd/MM/yyyy") }
+                                    </h4>
                                 </div>
                                 <div className="flex flex-col justify-center">
                                     <p className="flex-none text-lg ltr:mr-2 rtl:ml-2">Tempo real:</p>
-                                    <h4 className="text-dark text-lg font-bold">14/10/24 - 21/10/25</h4>
+                                    <h4 className="text-dark text-lg font-bold"> - </h4>
                                 </div>
                                 <div className="flex flex-col justify-center">
                                     <p className="flex-none text-lg ltr:mr-2 rtl:ml-2">Custo Estimado:</p>
-                                    <h4 className="text-dark text-3xl font-bold">100.000 kz</h4>
+                                    <h4 className="text-dark text-3xl font-bold">
+                                    {Intl.NumberFormat('pt', {
+                                                currency: 'AOA'
+                                    }).format(phase.estimatedCost) } kz
+                                    </h4>
                                 </div>
 
                                 <div className="flex flex-col justify-center">
                                     <p className="flex-none text-lg ltr:mr-2 rtl:ml-2">Custo real:</p>
-                                    <h4 className="text-dark text-3xl font-bold">150.000 kz</h4>
+                                    <h4 className="text-dark text-3xl font-bold">0</h4>
                                 </div>
                             </div>
                         </div>
@@ -59,6 +119,7 @@ const ComponentsProprietiesDetail = ({ id }: {id: number}) => {
             <div className="flex flex-wrap items-center justify-between gap-4 mt-10">
                 <h2 className="text-xl">Tarefas</h2>
 
+                <CreatePhaseModal  phaseId={phase.id}  />
             </div>
 
             <div className="panel mt-5 overflow-hidden border-0 p-0">
@@ -67,42 +128,39 @@ const ComponentsProprietiesDetail = ({ id }: {id: number}) => {
                         <table className="table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>Ordem</th>
                                     <th>Nome</th>
                                     <th>Data início</th>
                                     <th>Data início</th>
                                     <th>Responsável</th>
                                     <th>Progresso</th>
                                     <th>Status</th>
-                                    <th className="!text-center">Actions</th>
+                                    <th className="!text-center">Acções</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {Tasks.map((stock) => {
+                                {tasks.map((task) => {
                                     return (
-                                        <tr key={stock.id}>
-                                            <td>{stock.id}</td>
-                                            <td>{stock.name}</td>
-                                            <td className="whitespace-nowrap">{stock.start_date}</td>
-                                            <td className="whitespace-nowrap">{stock.end_date}</td>
-                                            <td className="whitespace-nowrap">{stock.assigned_to}</td>
+                                        <tr key={task.id}>
+                                            <td>{task.name}</td>
+                                            <td className="whitespace-nowrap">{format(new Date(task.startDate), "dd/MM/yyyy") }</td>
+                                            <td className="whitespace-nowrap">{format(new Date(task.endDate), "dd/MM/yyyy") }</td>
+                                            <td className="whitespace-nowrap">{task.assignedTo}</td>
                                             <td className="whitespace-nowrap">
                                                 <div className='w-8'>
-                                                    <CircularProgressbar value={stock.progress} text={`${stock.progress}%`} />
+                                                    <CircularProgressbar value={task.progress} text={`${task.progress}%`} />
                                                 </div>
                                             </td>
                                             <td className={"whitespace-nowrap capitalize"} >
-                                                <span className='badge badge-outline-primary'>{stock.status}</span>
+                                                <span className='badge badge-outline-primary'>{task.status}</span>
                                             </td>
-                                            <td>
-                                                <div className="flex items-center justify-center gap-4">
-                                                    <button type="button" className="btn btn-sm btn-outline-primary">
-                                                        Ver
-                                                    </button>
-                                                    <button type="button" className="btn btn-sm btn-outline-success">
-                                                        Editar
-                                                    </button>
-                                                </div>
+                                            <td className='flex justify-end'>
+                                                <button type="button" onClick={() => console.log()}>
+                                                    <IconEye className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" />
+                                                </button>
+                                                <EditTaskModal task={task} />
+                                                <button type="button" onClick={() => deleteTask(task.id, task.executionPhaseId)}>
+                                                    <IconTrashLines className="shrink-0 ltr:mr-2 rtl:ml-2" />
+                                                </button>
                                             </td>
                                         </tr>
                                     );

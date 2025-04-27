@@ -8,7 +8,7 @@ import * as yup from 'yup';
 
 const schema = yup.object({
     name: yup.string(),
-    sequenceOrder: yup.number(),
+    sequenceOrder: yup.number().min(1),
     estimatedCost: yup.number(),
     startDate: yup.date(),
     endDate: yup.date(),
@@ -23,13 +23,24 @@ type FormData = {
     estimatedCost: number
 }
 
+type Phase = {
+    id: string
+    name: string
+    sequenceOrder: number
+    startDate: Date
+    projectId: string
+    endDate: Date
+    status: string
+    estimatedCost: number
+}
+
 
 interface FormProps {
     closeModal: ()=> void
-    projectId: string
+    phase: Phase
 }
 
-export function CreatePhaseForm({ closeModal, projectId }: FormProps) {
+export function CreatePhaseForm({ closeModal, phase }: FormProps) {
 
     const {
         handleSubmit,
@@ -37,6 +48,14 @@ export function CreatePhaseForm({ closeModal, projectId }: FormProps) {
         formState: { errors, isSubmitting },
       } = useForm({
         resolver: yupResolver(schema),
+        defaultValues: {
+            name: phase.name,
+            sequenceOrder: phase.sequenceOrder,
+            estimatedCost: phase.estimatedCost,
+            endDate: phase.endDate,
+            startDate: phase.startDate
+
+        }
     })
 
     const showMessage = (msg = '', type = 'success') => {
@@ -58,7 +77,7 @@ export function CreatePhaseForm({ closeModal, projectId }: FormProps) {
 
 
         try {
-            const response = await  api.post(`/phase/create/${projectId}`, {
+            const response = await  api.put(`/phase/update/${phase.id}`, {
                 name: data.name,
                 sequence_order: data.sequenceOrder,
                 start_date: new Date(data.startDate),
@@ -69,7 +88,7 @@ export function CreatePhaseForm({ closeModal, projectId }: FormProps) {
             console.log(response)
 
             showMessage('Fase Criado com sucesso!')
-            revalidateData(`propriedades/${projectId}`)
+            revalidateData(`propriedades/${phase.projectId}`)
         } catch (error) {
             showMessage('Erro ao criar Fase!', 'error')
             console.log(error)

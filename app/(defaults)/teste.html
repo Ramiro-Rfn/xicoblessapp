@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestão de Estoque de Materiais</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+    body { display: flex; background: #f2f3f5; height: 100vh; }
+
+    /* Sidebar */
+    .sidebar {
+      width: 200px; background: #1f2937; color: #fff; padding: 20px;
+    }
+    .sidebar h2 { margin-bottom: 30px; font-size: 18px; }
+    .sidebar a { display: block; color: #cbd5e0; text-decoration: none; margin: 12px 0; }
+    .sidebar a:hover { color: #fff; }
+
+    /* Main content */
+    .main {
+      flex: 1; margin-left: 200px; display: flex; flex-direction: column;
+    }
+
+    /* Topbar */
+    .topbar {
+      height: 60px; background: #fff; box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+      display: flex; align-items: center; justify-content: space-between; padding: 0 20px;
+    }
+    .topbar .title { font-size: 20px; color: #333; }
+    .topbar .user { display: flex; align-items: center; gap: 8px; }
+    .topbar img { width: 32px; height: 32px; border-radius: 50%; }
+
+    /* Content area */
+    .content {
+      padding: 20px; flex: 1; overflow-y: auto;
+    }
+
+    .card-summary {
+      background: #fff; border-radius: 8px; padding: 20px; box-shadow: 0 0 8px rgba(0,0,0,0.05);
+      display: flex; gap: 20px; margin-bottom: 20px;
+    }
+    .card-summary .info {
+      flex: 1; display: flex; flex-direction: column; gap: 10px;
+    }
+    .card-summary .info strong { color: #555; }
+    .card-summary .info p { font-size: 18px; color: #111; }
+
+    /* Form de Movimentação */
+    .movement-form {
+      background: #fff; border-radius: 8px; padding: 20px; box-shadow: 0 0 8px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
+    .movement-form h3 { margin-bottom: 15px; color: #333; }
+    .movement-form .row { display: flex; gap: 10px; margin-bottom: 12px; }
+    .movement-form label { flex: 1; font-size: 14px; color: #555; }
+    .movement-form input, .movement-form select {
+      flex: 2; padding: 8px; border: 1px solid #ccc; border-radius: 4px;
+    }
+    .movement-form button {
+      padding: 10px 20px; background: #1A73E8; color: #fff; border: none; border-radius: 4px;
+      cursor: pointer;
+    }
+    .movement-form button:hover { background: #1666c1; }
+
+    /* Ledger Table */
+    .ledger {
+      background: #fff; border-radius: 8px; padding: 20px; box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    }
+    .ledger h3 { margin-bottom: 15px; color: #333; }
+    table {
+      width: 100%; border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px; text-align: left; border-bottom: 1px solid #eee;
+    }
+    th { background: #f9fafb; color: #555; }
+    .type-entry { color: #34A853; font-weight: bold; }
+    .type-exit { color: #EA4335; font-weight: bold; }
+    .type-reservation { color: #FBBC05; font-weight: bold; }
+    .type-release { color: #888; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>ESTOQUE</h2>
+    <a href="#">Visão Geral</a>
+    <a href="#">Materiais</a>
+    <a href="#">Movimentações</a>
+    <a href="#">Relatórios</a>
+    <a href="#">Configurações</a>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <span class="title">Gestão de Materiais</span>
+      <div class="user">
+        <span>Eng. Carla</span>
+        <img src="https://i.pravatar.cc/32" alt="User">
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- Resumo do material -->
+      <div class="card-summary">
+        <div class="info">
+          <strong>Material:</strong>
+          <p>Cimento CP II</p>
+        </div>
+        <div class="info">
+          <strong>Unidade:</strong>
+          <p>Saco (50kg)</p>
+        </div>
+        <div class="info">
+          <strong>Saldo Atual:</strong>
+          <p>1.250 sacos</p>
+        </div>
+        <div class="info">
+          <strong>Preço Unitário:</strong>
+          <p>Kz 5.500,00</p>
+        </div>
+      </div>
+
+      <!-- Formulário de movimentação -->
+      <div class="movement-form">
+        <h3>Nova Movimentação</h3>
+        <div class="row">
+          <label for="type">Tipo:</label>
+          <select id="type">
+            <option value="entry">Entrada</option>
+            <option value="exit">Saída</option>
+            <option value="reservation">Reserva</option>
+            <option value="release">Liberação</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="quantity">Quantidade:</label>
+          <input type="number" id="quantity" placeholder="Ex: 100">
+        </div>
+        <div class="row">
+          <label for="reference">Referência (ID):</label>
+          <input type="text" id="reference" placeholder="Ex: 123">
+        </div>
+        <div class="row">
+          <label for="unit_price">Preço Unitário:</label>
+          <input type="text" id="unit_price" placeholder="Kz x.xxx,xx">
+        </div>
+        <button type="button">Registrar Movimentação</button>
+      </div>
+
+      <!-- Ledger de movimentações -->
+      <div class="ledger">
+        <h3>Histórico de Movimentações</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Tipo</th>
+              <th>Referência</th>
+              <th>Quantidade</th>
+              <th>Preço Unit.</th>
+              <th>Saldo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2025-04-22</td>
+              <td class="type-entry">Entrada</td>
+              <td>GR-234</td>
+              <td>500</td>
+              <td>Kz 5.500</td>
+              <td>1.250</td>
+            </tr>
+            <tr>
+              <td>2025-04-23</td>
+              <td class="type-reservation">Reserva</td>
+              <td>RQ-456</td>
+              <td>200</td>
+              <td>—</td>
+              <td>1.050</td>
+            </tr>
+            <tr>
+              <td>2025-04-24</td>
+              <td class="type-exit">Saída</td>
+              <td>TC-789</td>
+              <td>150</td>
+              <td>Kz 5.500</td>
+              <td>900</td>
+            </tr>
+            <tr>
+              <td>2025-04-25</td>
+              <td class="type-release">Liberação</td>
+              <td>RQ-456</td>
+              <td>50</td>
+              <td>—</td>
+              <td>950</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
