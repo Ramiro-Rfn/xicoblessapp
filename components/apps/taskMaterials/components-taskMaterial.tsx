@@ -1,17 +1,15 @@
 'use client';
-import IconEye from '@/components/icon/icon-eye';
-import IconPencilPaper from '@/components/icon/icon-pencil-paper';
 import IconSearch from '@/components/icon/icon-search';
-import IconTrashLines from '@/components/icon/icon-trash-lines';
-import { CreateMaterialModal } from './createMaterialModal';
+import { CreateTaskMaterialModal } from './createTaskMaterialModal';
 
 
 
 interface StockProps {
-    materials: []
+    taskMaterials: []
+    taskId: string
 }
 
-const ComponentsStock = ({ materials }: StockProps) => {
+const ComponentsTaskMaterial = ({ taskMaterials, taskId }: StockProps) => {
 
 
     return (
@@ -21,7 +19,7 @@ const ComponentsStock = ({ materials }: StockProps) => {
                 <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
                     <div className="flex gap-3">
                         <div>
-                            <CreateMaterialModal  />
+                            <CreateTaskMaterialModal taskId={taskId}  />
                         </div>
 
                     </div>
@@ -44,35 +42,23 @@ const ComponentsStock = ({ materials }: StockProps) => {
                                     <th>Quantidade</th>
                                     <th>Preço unit.</th>
                                     <th>Preço total</th>
-                                    <th className="!text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {materials.map((stock: any) => {
+                                {taskMaterials.map((stock: any) => {
                                     return (
                                         <tr key={stock.id}>
                                             <td>
                                                 <div className="flex w-max items-center">
 
-                                                    <div>{stock.name}</div>
+                                                    <div>{stock.material.name}</div>
                                                 </div>
                                             </td>
-                                            <td>{stock.reference}</td>
-                                            <td className="whitespace-nowrap">{stock.unit}</td>
-                                            <td className="whitespace-nowrap">{stock.stockQuantity}</td>
-                                            <td className="whitespace-nowrap">{Intl.NumberFormat('pt', {currency: 'AOA'}).format(stock.unitCost) } kz</td>
-                                            <td className="whitespace-nowrap">{Intl.NumberFormat('pt', {currency: 'AOA'}).format(stock.stockQuantity*stock.unitCost) } kz</td>
-                                            <td className='flex justify-end'>
-                                                <button type="button" onClick={() => console.log()}>
-                                                    <IconEye className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" />
-                                                </button>
-                                                <button type="button" onClick={() => console.log()}>
-                                                    <IconPencilPaper className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" />
-                                                </button>
-                                                <button type="button" onClick={() => console.log()}>
-                                                    <IconTrashLines className="shrink-0 ltr:mr-2 rtl:ml-2" />
-                                                </button>
-                                            </td>
+                                            <td>{stock.material.reference}</td>
+                                            <td className="whitespace-nowrap">{stock.material.unit}</td>
+                                            <td className="whitespace-nowrap">{stock.quantityNeeded}</td>
+                                            <td className="whitespace-nowrap">{Intl.NumberFormat('pt', {currency: 'AOA'}).format(stock.material.unitCost) } kz</td>
+                                            <td className="whitespace-nowrap">{Intl.NumberFormat('pt', {currency: 'AOA'}).format(stock.quantityNeeded * stock.material.unitCost) } kz</td>
                                         </tr>
                                     );
                                 })}
@@ -84,4 +70,4 @@ const ComponentsStock = ({ materials }: StockProps) => {
     );
 };
 
-export default ComponentsStock;
+export default ComponentsTaskMaterial;

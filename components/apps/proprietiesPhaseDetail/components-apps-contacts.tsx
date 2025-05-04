@@ -1,10 +1,11 @@
 'use client';
 
 import { revalidateData } from '@/app/action/revalidateData';
-import IconEye from '@/components/icon/icon-eye';
+import IconArrowForward from '@/components/icon/icon-arrow-forward';
 import IconTrashLines from '@/components/icon/icon-trash-lines';
 import { api } from '@/services/axios';
 import { format } from 'date-fns';
+import Link from 'next/link';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import Swal from 'sweetalert2';
@@ -154,9 +155,12 @@ const ComponentsProprietiesDetail = ({ phase, tasks }: PhaseDetailProps) => {
                                                 <span className='badge badge-outline-primary'>{task.status}</span>
                                             </td>
                                             <td className='flex justify-end'>
-                                                <button type="button" onClick={() => console.log()}>
-                                                    <IconEye className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" />
-                                                </button>
+                                                <Link href={`/propriedades/etapas/tarefa/${task.id}`}>
+                                                    <button type="button" onClick={() => console.log()}>
+                                                        <IconArrowForward className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" />
+                                                    </button>
+                                                </Link>
+
                                                 <EditTaskModal task={task} />
                                                 <button type="button" onClick={() => deleteTask(task.id, task.executionPhaseId)}>
                                                     <IconTrashLines className="shrink-0 ltr:mr-2 rtl:ml-2" />
