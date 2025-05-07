@@ -29,7 +29,16 @@ async function Contacts({ params}: {params: { id: string }}){
 
     const phases = await phasesResponse.json()
 
-    return <ComponentsProprietiesDetail project={project} phases={phases} />;
+    const documentsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/document/all/${project.id}`, {
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${TOKEN}`,
+        }
+    });
+
+    const documents = await documentsResponse.json();
+
+    return <ComponentsProprietiesDetail project={project} documents={documents} phases={phases} />;
 };
 
 export default Contacts;

@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import Swal from 'sweetalert2';
+import { Documents } from '../Documents';
 import { CreatePhaseModal } from './CreatePhaseModal';
 import { EditPhaseModal } from './EditPhaseModal';
 
@@ -36,12 +37,27 @@ type Phase = {
     estimatedCost: number
 }
 
+type Document = {
+    id: string;
+    name: string;
+    keyName: string;
+    size: number;
+    contentType: string;
+    projectId: string;
+    category: string;
+    url: string;
+    taskId: string | null;
+    createdAt: string;
+    updatedAt: string;
+}
+
 interface ProjectDetailProps {
     project: Project
     phases: Phase[]
+    documents: Document[]
 }
 
-const ComponentsProprietiesDetail = ({ project, phases }: ProjectDetailProps) => {
+const ComponentsProprietiesDetail = ({ project, phases, documents }: ProjectDetailProps) => {
     const showMessage = (msg = '', type = 'success') => {
         const toast: any = Swal.mixin({
             toast: true,
@@ -73,10 +89,10 @@ const ComponentsProprietiesDetail = ({ project, phases }: ProjectDetailProps) =>
 
     return (
         <div>
-            <div className=" overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]" key={project.id}>
-                <div className="flex overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]">
-                    <div className=" overflow-hidden p-6">
-                        <img className="mx-auto rounded-md max-h-90 w-full object-cover" src={`/assets/images/default-home-cover.png`} alt="propriety_image" />
+            <div className=" overflow-hidden flex gap-8 p-1 rounded-md text-center" key={project.id}>
+                <div className="flex-1 flex overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]">
+                    <div className=" overflow-hidden p-6 w-1/2">
+                        <img className="mx-auto rounded-md max-h-90 h-full bg-center object-cover" src={`/assets/images/default-home-cover.png`} alt="propriety_image" />
                     </div>
                     <div className="relative px-6 pb-24">
                         <div className="mt-6 grid grid-cols-1 gap-4 ltr:text-left rtl:text-right">
@@ -109,6 +125,9 @@ const ComponentsProprietiesDetail = ({ project, phases }: ProjectDetailProps) =>
                         </div>
                     </div>
                 </div>
+                {/* add a section for projects documents*/}
+                <Documents documents={documents} projectId={project.id} />
+
             </div>
 
 
