@@ -1,16 +1,13 @@
 'use client';
 
 import { revalidateData } from '@/app/action/revalidateData';
-import IconArrowForward from '@/components/icon/icon-arrow-forward';
-import IconTrashLines from '@/components/icon/icon-trash-lines';
 import { api } from '@/services/axios';
 import { format } from 'date-fns';
-import Link from 'next/link';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import Swal from 'sweetalert2';
 import { CreatePhaseModal } from './CreateTaskModal';
-import { EditTaskModal } from './EditTaskModal';
+import { TaskMaterials } from './TaskMaterials';
 
 type Phase = {
     id: string
@@ -70,47 +67,83 @@ const ComponentsProprietiesDetail = ({ phase, tasks }: PhaseDetailProps) => {
         }
     }
 
+    function begdeStatus(status: string) {
+        if (status === 'pending') {
+            return 'Pendente'
+        }
+        if (status === 'in_progress') {
+            return 'Em andamento'
+        }
+        if (status === 'completed') {
+            return 'Concluído'
+        }
+    }
+
+
+    function begdeColorStatus(status: string) {
+        if (status === 'pending') {
+            return 'bg-yellow-500'
+        }
+        if (status === 'in_progress') {
+            return 'bg-blue-500'
+        }
+        if (status === 'completed') {
+            return 'bg-green-500'
+        }
+    }
+
     return (
         <div>
-            <div className=" overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]">
+            <div className="flex gap-8">
 
-                <div className="flex overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]">
-                    <div className="relative px-6 py-6">
-                        <div className="flex mb-4 items-center">
-                            <div className="truncate text-3xl font-bold text-black">Fundação</div>
-                        </div>
+                <div className="rounded-md bg-white shadow p-6 flex flex-col md:flex-row gap-8 dark:bg-[#1c232f]">
+                  <div className="flex flex-col items-center justify-center">
+                    <div className='w-20'>
+                        <CircularProgressbar value={79} text={`${79}%`} styles={{
+                            path: { stroke: '#2563eb' },
+                            text: { fill: '#2563eb', fontSize: '22px', fontWeight: 700 }
+                        }}/>
+                    </div>
+                    <span className="mt-2 text-sm text-gray-500">Progresso</span>
+                  </div>
+                  <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className='gap-2'>
+                      <p className="flex text-gray-500 gap-2">
+                        Tempo Estimado:
+                      </p>
+                      <h4 className="flex text-lg font-bold">
+                        {format(new Date(phase.startDate), "dd/MM/yyyy")} - {format(new Date(phase.endDate), "dd/MM/yyyy")}
+                      </h4>
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                      <p className="text-gray-500 flex items-center gap-2">
+                        Tempo real:
+                      </p>
+                      <h4 className="flex text-lg font-bold">-</h4>
+                    </div>
+                    <div>
+                      <p className="flex text-gray-500 gap-2">
+                        Custo Estimado:
+                      </p>
+                      <h4 className="flex text-2xl font-bold">
+                        {Intl.NumberFormat('pt', { currency: 'AOA' }).format(phase.estimatedCost)} kz
+                      </h4>
+                    </div>
+                    <div>
+                      <p className="flex text-gray-500 gap-2">
+                        Custo real:
+                      </p>
+                      <h4 className="flex text-2xl font-bold">0</h4>
+                    </div>
+                  </div>
+                </div>
 
-                        <div className='flex gap-8'>
-                            <div className="flex items-center">
-                                <div className="w-32">
-                                    <CircularProgressbar value={79} text={`${79}%`} />
-                                </div>
-                            </div>
-                            <div className="grid grid-cols-2 gap-4 ltr:text-left rtl:text-right">
-                                <div className="flex flex-col justify-center">
-                                    <p className="flex-none text-lg ltr:mr-2 rtl:ml-2">Tempo Estimado:</p>
-                                    <h4 className="text-dark text-lg font-bold">
-                                        {format(new Date(phase.startDate), "dd/MM/yyyy") } - {format(new Date(phase.startDate), "dd/MM/yyyy") }
-                                    </h4>
-                                </div>
-                                <div className="flex flex-col justify-center">
-                                    <p className="flex-none text-lg ltr:mr-2 rtl:ml-2">Tempo real:</p>
-                                    <h4 className="text-dark text-lg font-bold"> - </h4>
-                                </div>
-                                <div className="flex flex-col justify-center">
-                                    <p className="flex-none text-lg ltr:mr-2 rtl:ml-2">Custo Estimado:</p>
-                                    <h4 className="text-dark text-3xl font-bold">
-                                    {Intl.NumberFormat('pt', {
-                                                currency: 'AOA'
-                                    }).format(phase.estimatedCost) } kz
-                                    </h4>
-                                </div>
-
-                                <div className="flex flex-col justify-center">
-                                    <p className="flex-none text-lg ltr:mr-2 rtl:ml-2">Custo real:</p>
-                                    <h4 className="text-dark text-3xl font-bold">0</h4>
-                                </div>
-                            </div>
+                <div className='flex flex-col rounded-md flex-1 bg-white shadow p-6 gap-8 dark:bg-[#1c232f]'>
+                    <h2 className="text-xl">Equeipe</h2>
+                    <div className='flex flex-col gap-2'>
+                        <div className='flex flex-col gap-2'>
+                            <p className='text-gray-500'>Nome</p>
+                            <h4 className='text-lg font-bold'>-</h4>
                         </div>
                     </div>
                 </div>
@@ -123,54 +156,28 @@ const ComponentsProprietiesDetail = ({ phase, tasks }: PhaseDetailProps) => {
                 <CreatePhaseModal  phaseId={phase.id}  />
             </div>
 
-            <div className="panel mt-5 overflow-hidden border-0 p-0">
+            <div className=" mt-5 border-0 p-0">
             {/* <ComponentsDatatablesBasic /> */}
-                    <div className="table-responsive">
-                        <table className="table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Data início</th>
-                                    <th>Data início</th>
-                                    <th>Responsável</th>
-                                    <th>Progresso</th>
-                                    <th>Status</th>
-                                    <th className="!text-center">Acções</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                    <div className="">
+                        <div className=" table-hover">
+                            <div className='w-full'>
+                                <div className='grid grid-cols-6'>
+                                    <div className='bg-gray-300 p-2 dark:bg-[#1c232f]'>Nome</div>
+                                    <div className='bg-gray-300 p-2 dark:bg-[#1c232f]'>Data início</div>
+                                    <div className='bg-gray-300 p-2 dark:bg-[#1c232f]'>Data início</div>
+                                    <div className='bg-gray-300 p-2 dark:bg-[#1c232f]'>Responsável</div>
+                                    <div className='bg-gray-300 p-2 dark:bg-[#1c232f]'>Status</div>
+                                    <div className="!text-center bg-gray-300 p-2 dark:bg-[#1c232f]">Acções</div>
+                                </div>
+                            </div>
+                            <div className='space-y-4'>
                                 {tasks.map((task) => {
                                     return (
-                                        <tr key={task.id}>
-                                            <td>{task.name}</td>
-                                            <td className="whitespace-nowrap">{format(new Date(task.startDate), "dd/MM/yyyy") }</td>
-                                            <td className="whitespace-nowrap">{format(new Date(task.endDate), "dd/MM/yyyy") }</td>
-                                            <td className="whitespace-nowrap">{task.assignedTo}</td>
-                                            <td className="whitespace-nowrap">
-                                                <div className='w-8'>
-                                                    <CircularProgressbar value={task.progress} text={`${task.progress}%`} />
-                                                </div>
-                                            </td>
-                                            <td className={"whitespace-nowrap capitalize"} >
-                                                <span className='badge badge-outline-primary'>{task.status}</span>
-                                            </td>
-                                            <td className='flex justify-end'>
-                                                <Link href={`/propriedades/etapas/tarefa/${task.id}`}>
-                                                    <button type="button" onClick={() => console.log()}>
-                                                        <IconArrowForward className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" />
-                                                    </button>
-                                                </Link>
-
-                                                <EditTaskModal task={task} />
-                                                <button type="button" onClick={() => deleteTask(task.id, task.executionPhaseId)}>
-                                                    <IconTrashLines className="shrink-0 ltr:mr-2 rtl:ml-2" />
-                                                </button>
-                                            </td>
-                                        </tr>
+                                        <TaskMaterials key={task.id} task={task} />
                                     );
                                 })}
-                            </tbody>
-                        </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
         </div>

@@ -1,53 +1,74 @@
 'use client';
-import IconSearch from '@/components/icon/icon-search';
-import { CreateTaskMaterialModal } from './createTaskMaterialModal';
 
-
+import IconTrashLines from "@/components/icon/icon-trash-lines";
+import { api } from "@/services/axios";
 
 interface StockProps {
-    taskMaterials: []
+    taskMaterials: any[]
     taskId: string
 }
 
-const ComponentsTaskMaterial = ({ taskMaterials, taskId }: StockProps) => {
+const   ComponentsTaskMaterial = ({ taskMaterials, taskId }: StockProps) => {
 
+
+    async function handleDeleteTaskMaterial(taskMaterialId: string) {
+        try {
+            await api.delete(`/taskmaterials/${taskMaterialId}`)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <div>
-            <div className="flex flex-wrap items-center justify-between gap-4">
-                <h2 className="text-xl">Lista de Materiais</h2>
-                <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
-                    <div className="flex gap-3">
-                        <div>
-                            <CreateTaskMaterialModal taskId={taskId}  />
-                        </div>
-
-                    </div>
-                    <div className="relative">
-                        <input type="text" placeholder="Search Contacts" className="peer form-input py-2 ltr:pr-11 rtl:pl-11" />
-                        <button type="button" className="absolute top-1/2 -translate-y-1/2 peer-focus:text-primary ltr:right-[11px] rtl:left-[11px]">
-                            <IconSearch className="mx-auto" />
-                        </button>
-                    </div>
-                </div>
-            </div>
-                <div className="panel mt-5 overflow-hidden border-0 p-0">
+                <div className="panel overflow-hidden border-0 p-0">
                     <div className="table-responsive">
                         <table className="table-striped table-hover">
                             <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Referência</th>
-                                    <th>Unidate</th>
-                                    <th>Quantidade</th>
-                                    <th>Preço unit.</th>
-                                    <th>Preço total</th>
+                                <tr className="pt-0 ">
+                                    <th className='bg-white p-0 w-8 border-r'>
+                                        <div className="p-0">
+                                            <div className="h-1/2 border-b w-full">
+
+                                            </div>
+                                            <div className="h-1/2 border-b w-full">
+
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th className='bg-white font-bold'>Nome</th>
+                                    <th className='bg-white font-bold'>Referência</th>
+                                    <th className='bg-white font-bold'>Unidate</th>
+                                    <th className='bg-white font-bold'>Quantidade</th>
+                                    <th className='bg-white font-bold'>Preço unit.</th>
+                                    <th className='bg-white font-bold'>Preço total</th>
+                                    <th className='bg-white font-bold'>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                {taskMaterials.length === 0 && (
+                                    <tr>
+                                        <td colSpan={7} className="text-center">
+                                            <div className="flex justify-center items-center w-full col-span-6">
+                                                Nenhum material encontrado
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )}
+
                                 {taskMaterials.map((stock: any) => {
                                     return (
                                         <tr key={stock.id}>
+                                            <td className='bg-white p-0 w-8 border-r'>
+                                                <div className="p-0">
+                                                    <div className="h-1/2 border-b w-full">
+
+                                                    </div>
+                                                    <div className="h-1/2 border-b w-full">
+
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <div className="flex w-max items-center">
 
@@ -58,7 +79,14 @@ const ComponentsTaskMaterial = ({ taskMaterials, taskId }: StockProps) => {
                                             <td className="whitespace-nowrap">{stock.material.unit}</td>
                                             <td className="whitespace-nowrap">{stock.quantityNeeded}</td>
                                             <td className="whitespace-nowrap">{Intl.NumberFormat('pt', {currency: 'AOA'}).format(stock.material.unitCost) } kz</td>
-                                            <td className="whitespace-nowrap">{Intl.NumberFormat('pt', {currency: 'AOA'}).format(stock.quantityNeeded * stock.material.unitCost) } kz</td>
+                                            <td className="whitespace-nowrap font-bold">{Intl.NumberFormat('pt', {currency: 'AOA'}).format(stock.quantityNeeded * stock.material.unitCost) } kz</td>
+                                            <td>
+                                                <div className="flex w-max items-center">
+                                                    <button onClick={() => handleDeleteTaskMaterial(stock.id)} type="button" className=" text-black py-1 rounded-md">
+                                                        <IconTrashLines className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" />
+                                                    </button>
+                                                </div>
+                                            </td>
                                         </tr>
                                     );
                                 })}

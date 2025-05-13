@@ -87,6 +87,31 @@ const ComponentsProprietiesDetail = ({ project, phases, documents }: ProjectDeta
         }
     }
 
+    function begdeStatus(status: string) {
+        if (status === 'planned') {
+            return 'Pendente'
+        }
+        if (status === 'in_progress') {
+            return 'Em andamento'
+        }
+        if (status === 'done') {
+            return 'Concluído'
+        }
+    }
+
+
+    function begdeColorStatus(status: string) {
+        if (status === 'planned') {
+            return 'bg-yellow-500'
+        }
+        if (status === 'in_progress') {
+            return 'bg-blue-500'
+        }
+        if (status === 'done') {
+            return 'bg-green-500'
+        }
+    }
+
     return (
         <div>
             <div className=" overflow-hidden flex gap-8 p-1 rounded-md text-center" key={project.id}>
@@ -104,7 +129,7 @@ const ComponentsProprietiesDetail = ({ project, phases, documents }: ProjectDeta
                             </div>
                             <div className="flex items-center">
                                 <div className="flex-none ltr:mr-2 rtl:ml-2">Status :</div>
-                                <div className="text-white-dark">{project.status}</div>
+                                <div className="text-white-dark capitalize">{ begdeStatus(project.status)}</div>
                             </div>
 
                             <div className="flex items-center">
@@ -131,8 +156,8 @@ const ComponentsProprietiesDetail = ({ project, phases, documents }: ProjectDeta
             </div>
 
 
-            <div className="flex flex-wrap items-center justify-between gap-4 mt-10">
-                <h2 className="text-xl">Etapas da obra</h2>
+            <div className="flex items-end justify-between gap-4 mt-10">
+                <h2 className="text-xl font-bold">Etapas da obra</h2>
                 <CreatePhaseModal projectId={project.id} />
             </div>
 
@@ -140,16 +165,16 @@ const ComponentsProprietiesDetail = ({ project, phases, documents }: ProjectDeta
             {/* <ComponentsDatatablesBasic /> */}
                     <div className="table-responsive">
                         <table className="table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Ordem</th>
-                                    <th>Nome</th>
-                                    <th>Data início</th>
-                                    <th>Data início</th>
-                                    <th>Custo estimado</th>
-                                    <th>Progresso</th>
-                                    <th>Status</th>
-                                    <th className="!text-center">Actions</th>
+                            <thead className='bg-gray-500 dark:bg-[#1c232f]'>
+                                <tr className='bg-gray-500 dark:bg-[#1c232f]'>
+                                    <th className='bg-gray-300 dark:bg-[#1c232f]'>Ordem</th>
+                                    <th className='bg-gray-300 dark:bg-[#1c232f]'>Nome</th>
+                                    <th className='bg-gray-300 dark:bg-[#1c232f]'>Data início</th>
+                                    <th className='bg-gray-300 dark:bg-[#1c232f]'>Data início</th>
+                                    <th className='bg-gray-300 dark:bg-[#1c232f]'>Custo estimado</th>
+                                    <th className='bg-gray-300 dark:bg-[#1c232f]'>Progresso</th>
+                                    <th className='bg-gray-300 dark:bg-[#1c232f]'>Status</th>
+                                    <th className='bg-gray-300 dark:bg-[#1c232f]'>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -169,7 +194,7 @@ const ComponentsProprietiesDetail = ({ project, phases, documents }: ProjectDeta
                                                 </div>
                                             </td>
                                             <td className={"whitespace-nowrap capitalize"} >
-                                                <span className='badge badge-outline-primary'>{phase.status}</span>
+                                                <span className={`badge badge-outline-primary ${begdeColorStatus(phase.status)}`}>{begdeStatus(phase.status)}</span>
                                             </td>
                                             <td className='flex justify-end'>
                                                 <div className="flex items-center justify-center gap-4">

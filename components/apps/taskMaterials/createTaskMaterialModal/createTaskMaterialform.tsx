@@ -1,4 +1,3 @@
-import { revalidateData } from '@/app/action/revalidateData';
 import { api } from '@/services/axios';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from 'react';
@@ -23,10 +22,16 @@ type FormData = {
 interface FormProps {
     closeModal: ()=> void
     taskId: string
+    loadMaterials: () => void
 }
 
-export function CreateTaskMaterialForm({ closeModal, taskId }: FormProps) {
-    const [materials, setMaterial] = useState([])
+type Material = {
+    id: string
+    name: string
+}
+
+export function CreateTaskMaterialForm({ closeModal, taskId, loadMaterials }: FormProps) {
+    const [materials, setMaterial] = useState<Material[]>([])
 
     const {
         handleSubmit,
@@ -79,7 +84,7 @@ export function CreateTaskMaterialForm({ closeModal, taskId }: FormProps) {
 
             showMessage('Material Cadastrar com sucesso!')
 
-            revalidateData(`/propriedades/etapas/tarefa/${taskId}`)
+            loadMaterials()
         } catch (error) {
             showMessage('Erro ao cadastrar Material!', 'error')
             console.log(error)

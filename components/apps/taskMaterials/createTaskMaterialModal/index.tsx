@@ -8,9 +8,10 @@ import { CreateTaskMaterialForm } from "./createTaskMaterialform";
 
 interface CreateTaskMaterialProps {
     taskId: string
+    loadMaterials: () => void
 }
 
-export function CreateTaskMaterialModal({ taskId }: CreateTaskMaterialProps) {
+export function CreateTaskMaterialModal({ taskId, loadMaterials }: CreateTaskMaterialProps) {
     const [addContactModal, setAddContactModal] = useState<any>(false);
 
 
@@ -25,7 +26,7 @@ export function CreateTaskMaterialModal({ taskId }: CreateTaskMaterialProps) {
     return (
         <div>
             <div className="flex flex-wrap items-center justify-between gap-4">
-                <button type="button" className="btn btn-primary" onClick={handleAddPhase}>
+                <button type="button" className="text-blue-500 flex" onClick={handleAddPhase}>
                     <IconPlus className="ltr:mr-2 rtl:ml-2" />
                     Adicionar Material
                 </button>
@@ -58,7 +59,7 @@ export function CreateTaskMaterialModal({ taskId }: CreateTaskMaterialProps) {
                                         Adicionar Fase
                                     </div>
                                     <div className="p-5">
-                                        <CreateTaskMaterialForm taskId={taskId} closeModal={handleCloseModal} />
+                                        <CreateTaskMaterialForm taskId={taskId} closeModal={handleCloseModal} loadMaterials={loadMaterials} />
                                     </div>
                                 </Dialog.Panel>
                             </Transition.Child>
