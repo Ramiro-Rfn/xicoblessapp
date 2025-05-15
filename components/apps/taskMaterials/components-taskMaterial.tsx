@@ -20,29 +20,21 @@ const   ComponentsTaskMaterial = ({ taskMaterials, taskId }: StockProps) => {
     }
 
     return (
-        <div>
+        <div className="mt-4">
                 <div className="panel overflow-hidden border-0 p-0">
                     <div className="table-responsive">
                         <table className="table-striped table-hover">
                             <thead>
                                 <tr className="pt-0 ">
-                                    <th className='bg-white p-0 w-8 border-r'>
-                                        <div className="p-0">
-                                            <div className="h-1/2 border-b w-full">
 
-                                            </div>
-                                            <div className="h-1/2 border-b w-full">
-
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <th className='bg-white font-bold'>Nome</th>
-                                    <th className='bg-white font-bold'>Referência</th>
-                                    <th className='bg-white font-bold'>Unidate</th>
-                                    <th className='bg-white font-bold'>Quantidade</th>
-                                    <th className='bg-white font-bold'>Preço unit.</th>
-                                    <th className='bg-white font-bold'>Preço total</th>
-                                    <th className='bg-white font-bold'>Ações</th>
+                                    <th className='bg-gray-100 font-bold'>Nome</th>
+                                    <th className='bg-gray-100 font-bold'>Referência</th>
+                                    <th className='bg-gray-100 font-bold'>Unidate</th>
+                                    <th className='bg-gray-100 font-bold'>Qtd</th>
+                                    <th className='bg-gray-100 font-bold'>Preço unit.</th>
+                                    <th className='bg-gray-100 font-bold'>Preço total</th>
+                                    <th className='bg-gray-100 font-bold'>Status</th>
+                                    <th className='bg-gray-100 font-bold'>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -59,16 +51,7 @@ const   ComponentsTaskMaterial = ({ taskMaterials, taskId }: StockProps) => {
                                 {taskMaterials.map((stock: any) => {
                                     return (
                                         <tr key={stock.id}>
-                                            <td className='bg-white p-0 w-8 border-r'>
-                                                <div className="p-0">
-                                                    <div className="h-1/2 border-b w-full">
 
-                                                    </div>
-                                                    <div className="h-1/2 border-b w-full">
-
-                                                    </div>
-                                                </div>
-                                            </td>
                                             <td>
                                                 <div className="flex w-max items-center">
 
@@ -80,6 +63,9 @@ const   ComponentsTaskMaterial = ({ taskMaterials, taskId }: StockProps) => {
                                             <td className="whitespace-nowrap">{stock.quantityNeeded}</td>
                                             <td className="whitespace-nowrap">{Intl.NumberFormat('pt', {currency: 'AOA'}).format(stock.material.unitCost) } kz</td>
                                             <td className="whitespace-nowrap font-bold">{Intl.NumberFormat('pt', {currency: 'AOA'}).format(stock.quantityNeeded * stock.material.unitCost) } kz</td>
+                                            <td>
+                                                <span className="inline-block px-2 py-1 text-xs font-semibold rounded bg-green-100 text-green-800">Aprovado</span>
+                                            </td>
                                             <td>
                                                 <div className="flex w-max items-center">
                                                     <button onClick={() => handleDeleteTaskMaterial(stock.id)} type="button" className=" text-black py-1 rounded-md">

@@ -26,9 +26,8 @@ export function CreateTaskMaterialModal({ taskId, loadMaterials }: CreateTaskMat
     return (
         <div>
             <div className="flex flex-wrap items-center justify-between gap-4">
-                <button type="button" className="text-blue-500 flex" onClick={handleAddPhase}>
-                    <IconPlus className="ltr:mr-2 rtl:ml-2" />
-                    Adicionar Material
+                <button type="button" className=" w-6 h-6 text-white rounded-full items-center justify-center bg-secondary flex" onClick={handleAddPhase}>
+                    <IconPlus className="" />
                 </button>
             </div>
             <Transition appear show={addContactModal} as={Fragment}>

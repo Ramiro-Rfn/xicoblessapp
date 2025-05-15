@@ -20,6 +20,8 @@ async function Contacts({ params}: {params: {id: string}}){
 
     const phase = await phaseResponse.json()
 
+    console.log(phase)
+
     const tasksResponse = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/tasks/all/${phase.id}`, {
         headers: {
             Accept: 'application/json',
