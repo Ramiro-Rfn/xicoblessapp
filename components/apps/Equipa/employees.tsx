@@ -21,6 +21,7 @@ type Employee = {
     gender: 'male' | 'female'
     birthDate: Date
     address: string
+    salary: number
 }
 
 interface EmployeesPros {
@@ -155,7 +156,15 @@ const Employees = ({ employees }: EmployeesPros) => {
 
 
             {value === 'grid' && (
+
+
                 <div className="mt-5 grid w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+                    {employees.length === 0 && (
+                        <div className="col-span-4 text-center">
+                            <p>Nenhum colaborador encontrado</p>
+                        </div>
+                    )}
+
                     {employees.map((employee: Employee) => {
                         return (
                             <div className="relative overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]" key={employee.id}>
@@ -195,6 +204,12 @@ const Employees = ({ employees }: EmployeesPros) => {
                                                     <div className="flex-none ltr:mr-2 rtl:ml-2">Endereço:</div>
                                                     <div className="text-white-dark">{employee.address}</div>
                                                 </div>
+                                                <div className="flex items-center">
+                                                    <div className="flex-none ltr:mr-2 rtl:ml-2">Salário:</div>
+                                                    <div className="text-white-dark">
+                                                        { Intl.NumberFormat('pt-PT', { style: 'currency', currency: 'AOA' }).format(employee.salary)}
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -213,13 +228,19 @@ const Employees = ({ employees }: EmployeesPros) => {
                 </div>
             )}
 
+
+            {/* @ts-ignore */}
             <Transition appear show={addEmployeeModal} as={Fragment}>
+                {/* @ts-ignore */}
                 <Dialog as="div" open={addEmployeeModal} onClose={() => setAddEmployeeModal(false)} className="relative z-50">
+                    {/* @ts-ignore */}
                     <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
                         <div className="fixed inset-0 bg-[black]/60" />
                     </Transition.Child>
+                    {/* @ts-ignore */}
                     <div className="fixed inset-0 overflow-y-auto">
                         <div className="flex min-h-full items-center justify-center px-4 py-8">
+                            {/* @ts-ignore */}
                             <Transition.Child
                                 as={Fragment}
                                 enter="ease-out duration-300"
@@ -229,6 +250,8 @@ const Employees = ({ employees }: EmployeesPros) => {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
+
+                                {/* @ts-ignore */}
                                 <Dialog.Panel className="panel w-full max-w-lg overflow-hidden rounded-lg border-0 p-0 text-black dark:text-white-dark">
                                     <button
                                         type="button"

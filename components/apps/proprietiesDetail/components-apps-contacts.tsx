@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import { Documents } from '../Documents';
 import { CreatePhaseModal } from './CreatePhaseModal';
 import { EditPhaseModal } from './EditPhaseModal';
+import { ProjectMembers } from './ProjectMembers';
 
 type Project = {
     id: string
@@ -114,7 +115,7 @@ const ComponentsProprietiesDetail = ({ project, phases, documents }: ProjectDeta
 
     return (
         <div>
-            <div className=" overflow-hidden flex gap-8 p-1 rounded-md text-center" key={project.id}>
+            <div className=" overflow-hidden flex flex-col gap-8 p-1 rounded-md text-center" key={project.id}>
                 <div className="flex-1 flex overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]">
                     <div className=" overflow-hidden p-6 w-1/2">
                         <img className="mx-auto rounded-md max-h-90 h-full bg-center object-cover" src={`/assets/images/default-home-cover.png`} alt="propriety_image" />
@@ -151,9 +152,10 @@ const ComponentsProprietiesDetail = ({ project, phases, documents }: ProjectDeta
                     </div>
                 </div>
                 {/* add a section for projects documents*/}
-                <Documents documents={documents} projectId={project.id} />
 
             </div>
+
+
 
 
             <div className="flex items-end justify-between gap-4 mt-10">
@@ -219,6 +221,14 @@ const ComponentsProprietiesDetail = ({ project, phases, documents }: ProjectDeta
                         </table>
                     </div>
                 </div>
+
+            <div className="w-full mt-10">
+                <Documents documents={documents} projectId={project.id} />
+            </div>
+            <div className="w-full mt-10">
+                <ProjectMembers projectId={project.id} />
+            </div>
+
         </div>
     );
 };

@@ -6,8 +6,9 @@ export const metadata: Metadata = {
     title: 'Propriedades',
 };
 
-async function Contacts({ params}: {params: {id: string}}){
-    const cookie = cookies().get("xicobless_token");
+async function Contacts(props: {params: Promise<{id: string}>}) {
+    const params = await props.params;
+    const cookie = (await cookies()).get("xicobless_token");
 
     const TOKEN = cookie?.value
 

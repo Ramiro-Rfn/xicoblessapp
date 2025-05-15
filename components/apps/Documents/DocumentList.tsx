@@ -89,10 +89,10 @@ export function DocumentList({ documents, projectId }: DocumentListProps) {
             ) : (
 
 
-                <div className="grid grid-cols-1 gap-4">
+                <div className="grid grid-cols-2 gap-4">
                     {documents.map((document) => (
 
-                        <div key={document.id} className="flex items-center justify-between p-4 bg-white dark:bg-[#1c232f] rounded-md shadow">
+                        <div key={document.id} className="flex items-center justify-between p-4 bg-gray-100 dark:bg-[#1c232f] rounded-md">
                             <div className="flex items-center gap-4">
                                 <div>
                                     {/* add pdf icon */}

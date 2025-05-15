@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
   const token = generateToken({ id: user.id, email: user.email });
 
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
 
   cookieStore.set("xicobless_token", token)
   cookieStore.set("xicobless_user", JSON.stringify(user))

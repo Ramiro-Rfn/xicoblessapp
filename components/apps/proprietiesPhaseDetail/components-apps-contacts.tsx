@@ -177,48 +177,7 @@ const ComponentsProprietiesDetail = ({ phase, tasks }: PhaseDetailProps) => {
                     </div>
             </div>
 
-            <div className='flex flex-col rounded-md mt-8 flex-1 bg-white shadow p-6 gap-8 dark:bg-[#1c232f]'>
-                <h2 className="text-2xl font-bold">Equipe do Projeto</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                    {/* Membro 1 */}
-                    <div className="flex flex-col items-center bg-gray-50 rounded-md p-4 shadow-sm">
-                        {/* Substitua pelo seu ícone */}
-                        <span className="mb-2">
-                            <svg width="48" height="48" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke="#222" strokeWidth="1.5"/><path d="M4 20c0-2.21 3.582-4 8-4s8 1.79 8 4" stroke="#222" strokeWidth="1.5"/></svg>
-                        </span>
-                        <h4 className="font-bold">João Silva</h4>
-                        <span className="text-xs text-gray-500">Engenheiro Responsável</span>
-                        <span className="text-[11px] text-gray-400">Salário: R$ 12.000,00</span>
-                    </div>
-                    {/* Membro 2 */}
-                    <div className="flex flex-col items-center bg-gray-50 rounded-md p-4 shadow-sm">
-                        <span className="mb-2">
-                            <svg width="48" height="48" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke="#222" strokeWidth="1.5"/><path d="M4 20c0-2.21 3.582-4 8-4s8 1.79 8 4" stroke="#222" strokeWidth="1.5"/></svg>
-                        </span>
-                        <h4 className="font-bold">Maria Santos</h4>
-                        <span className="text-xs text-gray-500">Arquiteta</span>
-                        <span className="text-[11px] text-gray-400">Salário: R$ 10.000,00</span>
-                    </div>
-                    {/* Membro 3 */}
-                    <div className="flex flex-col items-center bg-gray-50 rounded-md p-4 shadow-sm">
-                        <span className="mb-2">
-                            <svg width="48" height="48" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke="#222" strokeWidth="1.5"/><path d="M4 20c0-2.21 3.582-4 8-4s8 1.79 8 4" stroke="#222" strokeWidth="1.5"/></svg>
-                        </span>
-                        <h4 className="font-bold">Pedro Costa</h4>
-                        <span className="text-xs text-gray-500">Mestre de Obras</span>
-                        <span className="text-[11px] text-gray-400">Salário: R$ 8.000,00</span>
-                    </div>
-                    {/* Membro 4 */}
-                    <div className="flex flex-col items-center bg-gray-50 rounded-md p-4 shadow-sm">
-                        <span className="mb-2">
-                            <svg width="48" height="48" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke="#222" strokeWidth="1.5"/><path d="M4 20c0-2.21 3.582-4 8-4s8 1.79 8 4" stroke="#222" strokeWidth="1.5"/></svg>
-                        </span>
-                        <h4 className="font-bold">Ana Oliveira</h4>
-                        <span className="text-xs text-gray-500">Gestora de Projetos</span>
-                        <span className="text-[11px] text-gray-400">Salário: R$ 11.000,00</span>
-                    </div>
-                </div>
-            </div>
+
         </div>
     );
 };

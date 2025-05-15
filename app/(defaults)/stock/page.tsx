@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 const Contacts = async () => {
-    const cookie = cookies().get("xicobless_token");
+    const cookie = (await cookies()).get("xicobless_token");
 
     const TOKEN = cookie?.value
 

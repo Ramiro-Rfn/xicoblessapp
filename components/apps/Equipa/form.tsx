@@ -16,6 +16,7 @@ const schema = yup.object({
   gender: yup.string().oneOf(['male', 'female']).required(),
   birthDate: yup.date().required(),
   address: yup.string().required(),
+  salary: yup.number().required(),
 })
 
 type FormData = {
@@ -28,6 +29,7 @@ type FormData = {
     gender: 'male' | 'female'
     birthDate: Date
     address: string
+    salary: number
 }
 
 interface FormProps {
@@ -74,6 +76,7 @@ export function Form({ closeModal }: FormProps) {
                     gender: data.gender,
                     birthDate: data.birthDate,
                     address: data.address,
+                    salary: data.salary,
                 },
             )
 
@@ -136,6 +139,11 @@ export function Form({ closeModal }: FormProps) {
                 <label htmlFor="address">Endereço</label>
                 <input {...register('address')} id="address" type="text" placeholder="Digite o endereço" className="form-input" />
                 {errors.address && <span className="text-danger">{errors.address.message}</span>}
+            </div>
+            <div className="mb-5">
+                <label htmlFor="salary">Salário</label>
+                <input {...register('salary')} id="salary" type="number" placeholder="Digite o salário" className="form-input" />
+                {errors.salary && <span className="text-danger">{errors.salary.message}</span>}
             </div>
             <div className="mt-8 flex items-center justify-end">
                 <button type="button" className="btn btn-outline-danger" onClick={closeModal}>

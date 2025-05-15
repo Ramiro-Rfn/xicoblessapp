@@ -24,13 +24,18 @@ export function Documents({ projectId, documents }: DocumentsProps) {
 
 
     return (
-        <div className="w-full max-w-[40%] items-center bg-white shadow rounded-md p-4 gap-4">
+        <div className="w-full items-center bg-white shadow rounded-md p-4 gap-4">
             <div className="flex justify-between gap-4 border-b-2 border-gray-200 py-2">
-                <h2 className="text-lg">Documentos da obra</h2>
+                <div className="flex flex-col">
+                    <h2 className="text-2xl font-bold">Documentos da obra</h2>
+                    <p className="text-sm text-gray-500">
+                        Lista de documentos que estão relacionados ao projeto.
+                    </p>
+                </div>
                 <CreateDocumentModal projectId={projectId} />
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 mt-4">
                 <DocumentList documents={documents} projectId={projectId} />
             </div>
         </div>

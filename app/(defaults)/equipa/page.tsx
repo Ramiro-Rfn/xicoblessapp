@@ -3,7 +3,7 @@ import Employees from "@/components/apps/Equipa/employees";
 import { cookies } from "next/headers";
 
 export default async function Equipa() {
-    const cookie = cookies().get("xicobless_token");
+    const cookie = (await cookies()).get("xicobless_token");
 
     const TOKEN = cookie?.value
 
