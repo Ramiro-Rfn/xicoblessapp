@@ -1,3 +1,4 @@
+
 import ComponentsAppsContacts from '@/components/apps/customers/components-apps-contacts';
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';

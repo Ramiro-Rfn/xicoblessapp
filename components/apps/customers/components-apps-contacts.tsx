@@ -5,7 +5,7 @@ import IconUserPlus from '@/components/icon/icon-user-plus';
 import IconX from '@/components/icon/icon-x';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-import { Form } from './form';
+import { Form } from '../Equipa/form';
 
 type Customer = {
     id: string
