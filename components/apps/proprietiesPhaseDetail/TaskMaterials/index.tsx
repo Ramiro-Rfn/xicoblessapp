@@ -1,4 +1,5 @@
 import { revalidateData } from "@/app/action/revalidateData";
+import IconTrashLines from "@/components/icon/icon-trash-lines";
 import { api } from "@/services/axios";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
@@ -6,6 +7,7 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import Swal from "sweetalert2";
 import ComponentsTaskMaterial from "../../taskMaterials/components-taskMaterial";
 import { CreateTaskMaterialModal } from "../../taskMaterials/createTaskMaterialModal";
+import { EditTaskModal } from "../EditTaskModal";
 
 
 type Task = {
@@ -60,6 +62,8 @@ export function TaskMaterials({ task }: TaskMaterialsProps) {
             padding: '10px 20px',
         });
     };
+
+
 
     async function deleteTask(taskId: string, executionPhaseId: string) {
         try {
@@ -122,7 +126,12 @@ export function TaskMaterials({ task }: TaskMaterialsProps) {
                         <div className={"whitespace-nowrap capitalize"} >
                             <span className={`badge rounded-full badge-outline-primary ${begdeColorStatus(task.status)}`}>{begdeStatus(task.status)}</span>
                         </div>
-
+                        <div className="flex items-end justify-end gap-2 mt-1">
+                            <EditTaskModal task={task} />
+                            <button type="button" onClick={() => deleteTask(task.id, task.executionPhaseId)}>
+                                <IconTrashLines className="shrink-0 w-4 h-4" />
+                            </button>
+                        </div>
                     </div>
                 </div>
 

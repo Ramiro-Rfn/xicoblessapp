@@ -38,6 +38,9 @@ type Phase = {
     status: string
     projectId: string
     estimatedCost: number
+    project: {
+        name: string
+    }
 }
 
 type Document = {

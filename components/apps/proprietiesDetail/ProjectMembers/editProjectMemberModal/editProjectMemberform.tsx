@@ -12,7 +12,7 @@ import * as yup from 'yup';
 const schema = yup.object({
     employeeId: yup.string().required(),
     role: yup.string().required(),
-    startDate: yup.string().required(),
+    startDate: yup.date().required(),
 })
 
 
@@ -55,7 +55,7 @@ export function EditProjectMemberForm({ closeModal, member, projectId, loadMembe
         defaultValues: {
             employeeId: member.employee.id,
             role: member.role,
-            startDate: member.startDate,
+            startDate: new Date(member.startDate).toISOString().split('T')[0],
         }
     })
 

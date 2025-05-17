@@ -49,8 +49,8 @@ export function CreateTaskForm({ closeModal, task }: FormProps) {
         defaultValues: {
             name: task.name,
             assignedTo: task.assignedTo,
-            startDate: task.startDate,
-            endDateDate: task.endDate
+            startDate: new Date(task.startDate).toISOString().split('T')[0],
+            endDate: new Date(task.endDate).toISOString().split('T')[0]
         }
     })
 
@@ -82,7 +82,7 @@ export function CreateTaskForm({ closeModal, task }: FormProps) {
 
             console.log(response)
 
-            showMessage('Tarefa Criado com sucesso!')
+            showMessage('Tarefa Editada com sucesso!')
 
 
             revalidateData(`propriedades/etapas/${task.executionPhaseId}`)

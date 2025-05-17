@@ -50,10 +50,10 @@ export function CreatePhaseForm({ closeModal, phase }: FormProps) {
         resolver: yupResolver(schema),
         defaultValues: {
             name: phase.name,
-            sequenceOrder: phase.sequenceOrder,
-            estimatedCost: phase.estimatedCost,
-            endDate: phase.endDate,
-            startDate: phase.startDate
+            sequenceOrder: String(phase.sequenceOrder),
+            estimatedCost: String(phase.estimatedCost),
+            endDate: new Date(phase.endDate).toISOString().split('T')[0],
+            startDate: new Date(phase.startDate).toISOString().split('T')[0]
 
         }
     })

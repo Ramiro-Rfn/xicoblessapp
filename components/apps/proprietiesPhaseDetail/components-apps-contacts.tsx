@@ -1,12 +1,10 @@
 'use client';
 
-import { revalidateData } from '@/app/action/revalidateData';
-import IconPencilPaper from '@/components/icon/icon-pencil-paper';
-import { api } from '@/services/axios';
 import ProgressBar from '@ramonak/react-progress-bar';
 import { format } from 'date-fns';
 import 'react-circular-progressbar/dist/styles.css';
 import Swal from 'sweetalert2';
+import { EditPhaseModal } from '../proprietiesDetail/EditPhaseModal';
 import { CreatePhaseModal } from './CreateTaskModal';
 import { TaskMaterials } from './TaskMaterials';
 type Phase = {
@@ -20,6 +18,7 @@ type Phase = {
     project: {
         name: string
     }
+    projectId: string
 }
 
 
@@ -56,19 +55,8 @@ const ComponentsProprietiesDetail = ({ phase, tasks }: PhaseDetailProps) => {
         });
     };
 
-    async function deleteTask(taskId: string, executionPhaseId: string) {
-        try {
-            await api.delete(`task/delete/${taskId}`)
 
-            showMessage('Tarefa Apagada')
 
-            revalidateData(`propriedades/etapas/${executionPhaseId}`)
-        } catch (error) {
-            showMessage('Erro ao apagar tarefa')
-
-            console.log(error)
-        }
-    }
 
     function begdeStatus(status: string) {
         if (status === 'pending') {
@@ -112,11 +100,8 @@ const ComponentsProprietiesDetail = ({ phase, tasks }: PhaseDetailProps) => {
                       </h4>
                     </div>
                   </div>
-                  <div className="">
-                        <button className='btn btn-outline-secondary'>
-                            <IconPencilPaper className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" />
-                            Editar
-                        </button>
+                  <div className="flex items-center gap-2">
+                        <EditPhaseModal phase={phase} />
                   </div>
                 </div>
 

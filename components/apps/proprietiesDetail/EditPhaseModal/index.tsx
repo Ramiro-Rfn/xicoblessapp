@@ -14,6 +14,9 @@ type Phase = {
     endDate: Date
     projectId: string
     status: string
+    project: {
+        name: string
+    }
     estimatedCost: number
 }
 

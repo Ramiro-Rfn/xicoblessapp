@@ -1,8 +1,8 @@
 'use client'
 
-import IconPencilPaper from "@/components/icon/icon-pencil-paper";
 import IconX from "@/components/icon/icon-x";
 import { Dialog, Transition, } from "@headlessui/react";
+import { LucideEdit } from "lucide-react";
 import { Fragment, useState } from "react";
 import { CreateTaskForm } from "./createTaskform";
 
@@ -37,16 +37,22 @@ export function EditTaskModal({ task }: CreateTaskModalProps) {
         <div>
             <div className="flex flex-wrap items-center justify-between gap-4">
                 <button type="button" onClick={handleAddPhase}>
-                    <IconPencilPaper className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" />
+                    <LucideEdit className="h-4 w-4 mb-0" />
                 </button>
             </div>
+
+            {/* @ts-ignore */}
             <Transition appear show={addContactModal} as={Fragment}>
+                {/* @ts-ignore */}
                 <Dialog as="div" open={addContactModal} onClose={() => setAddContactModal(false)} className="relative z-50">
+                    {/* @ts-ignore */}
                     <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
                         <div className="fixed inset-0 bg-[black]/60" />
                     </Transition.Child>
                     <div className="fixed inset-0 overflow-y-auto">
                         <div className="flex min-h-full items-center justify-center px-4 py-8">
+
+                            {/* @ts-ignore */}
                             <Transition.Child
                                 as={Fragment}
                                 enter="ease-out duration-300"
@@ -56,6 +62,7 @@ export function EditTaskModal({ task }: CreateTaskModalProps) {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
+                                {/* @ts-ignore */}
                                 <Dialog.Panel className="panel w-full max-w-lg overflow-hidden rounded-lg border-0 p-0 text-black dark:text-white-dark">
                                     <button
                                         type="button"
