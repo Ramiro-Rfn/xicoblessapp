@@ -7,8 +7,8 @@ import Swal from 'sweetalert2';
 import * as yup from 'yup';
 
 const schema = yup.object({
-    materialId: yup.string(),
-    quantity_needed: yup.number().min(1), // Você pode depois transformar isso numa enum de unidades permitidas
+    materialId: yup.string().required(),
+    quantity_needed: yup.number().min(1).required(), // Você pode depois transformar isso numa enum de unidades permitidas
 
 })
 

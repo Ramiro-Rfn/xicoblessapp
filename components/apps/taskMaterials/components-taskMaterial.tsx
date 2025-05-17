@@ -2,20 +2,40 @@
 
 import IconTrashLines from "@/components/icon/icon-trash-lines";
 import { api } from "@/services/axios";
+import Swal from "sweetalert2";
 
 interface StockProps {
     taskMaterials: any[]
     taskId: string
+    loadMaterials: () => void
 }
 
-const   ComponentsTaskMaterial = ({ taskMaterials, taskId }: StockProps) => {
+const   ComponentsTaskMaterial = ({ taskMaterials, taskId, loadMaterials }: StockProps) => {
 
+    const showMessage = (msg = '', type = 'success') => {
+        const toast: any = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000,
+            customClass: { container: 'toast' },
+        });
+        toast.fire({
+            icon: type,
+            title: msg,
+            padding: '10px 20px',
+        });
+    };
 
     async function handleDeleteTaskMaterial(taskMaterialId: string) {
         try {
-            await api.delete(`/taskmaterials/${taskMaterialId}`)
+            await api.delete(`/taskmaterials/delete/${taskMaterialId}`)
+
+            showMessage('Material apagado com sucesso!')
+            loadMaterials()
         } catch (error) {
             console.log(error)
+            showMessage('Erro ao apagar material!', 'error')
         }
     }
 
@@ -55,14 +75,14 @@ const   ComponentsTaskMaterial = ({ taskMaterials, taskId }: StockProps) => {
                                             <td>
                                                 <div className="flex w-max items-center">
 
-                                                    <div>{stock.material.name}</div>
+                                                    <div>{stock.material?.name}</div>
                                                 </div>
                                             </td>
-                                            <td>{stock.material.reference}</td>
-                                            <td className="whitespace-nowrap">{stock.material.unit}</td>
+                                            <td>{stock.material?.reference}</td>
+                                            <td className="whitespace-nowrap">{stock.material?.unit}</td>
                                             <td className="whitespace-nowrap">{stock.quantityNeeded}</td>
-                                            <td className="whitespace-nowrap">{Intl.NumberFormat('pt', {currency: 'AOA'}).format(stock.material.unitCost) } kz</td>
-                                            <td className="whitespace-nowrap font-bold">{Intl.NumberFormat('pt', {currency: 'AOA'}).format(stock.quantityNeeded * stock.material.unitCost) } kz</td>
+                                            <td className="whitespace-nowrap">{Intl.NumberFormat('pt', {currency: 'AOA'}).format(stock.material?.unitCost) } kz</td>
+                                            <td className="whitespace-nowrap font-bold">{Intl.NumberFormat('pt', {currency: 'AOA'}).format(stock.quantityNeeded * stock.material?.unitCost) } kz</td>
                                             <td>
                                                 <span className="inline-block px-2 py-1 text-xs font-semibold rounded bg-green-100 text-green-800">Aprovado</span>
                                             </td>

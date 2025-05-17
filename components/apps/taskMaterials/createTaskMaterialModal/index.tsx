@@ -30,13 +30,18 @@ export function CreateTaskMaterialModal({ taskId, loadMaterials }: CreateTaskMat
                     <IconPlus className="" />
                 </button>
             </div>
+            {/* @ts-ignore */}
             <Transition appear show={addContactModal} as={Fragment}>
+                {/* @ts-ignore */}
                 <Dialog as="div" open={addContactModal} onClose={() => setAddContactModal(false)} className="relative z-50">
+                    {/* @ts-ignore */}
                     <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
                         <div className="fixed inset-0 bg-[black]/60" />
                     </Transition.Child>
                     <div className="fixed inset-0 overflow-y-auto">
                         <div className="flex min-h-full items-center justify-center px-4 py-8">
+
+                            {/* @ts-ignore */}
                             <Transition.Child
                                 as={Fragment}
                                 enter="ease-out duration-300"
@@ -46,6 +51,7 @@ export function CreateTaskMaterialModal({ taskId, loadMaterials }: CreateTaskMat
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
+                                {/* @ts-ignore */}
                                 <Dialog.Panel className="panel w-full max-w-lg overflow-hidden rounded-lg border-0 p-0 text-black dark:text-white-dark">
                                     <button
                                         type="button"

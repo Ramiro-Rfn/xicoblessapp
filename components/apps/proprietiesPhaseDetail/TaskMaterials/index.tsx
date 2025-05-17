@@ -159,7 +159,11 @@ export function TaskMaterials({ task }: TaskMaterialsProps) {
                 <div className="transition-all duration-300 overflow-hidden">
                     {isOpen && (
                         <div className="transition-all duration-300 overflow-hidden">
-                            <ComponentsTaskMaterial taskMaterials={taskMaterials} taskId={task.id} />
+                            <ComponentsTaskMaterial
+                                taskMaterials={taskMaterials}
+                                taskId={task.id}
+                                loadMaterials={fetchTaskMaterials}
+                            />
                         </div>
                     )}
                 </div>
