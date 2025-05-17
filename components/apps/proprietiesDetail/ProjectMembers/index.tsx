@@ -1,5 +1,6 @@
 import { api } from "@/services/axios";
 import { format } from "date-fns";
+import { LucideInfo } from "lucide-react";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { CreateProjectMemberModal } from "./createProjectMemberModal";
@@ -87,7 +88,12 @@ export function ProjectMembers({projectId}: ProjectMembersProps) {
                     {/* Membro 1 */}
                     {members.length === 0 && (
                         <div className="flex col-span-4 flex-col w-full items-center bg-gray-50 rounded-md p-4 shadow-sm">
-                            <span className="text-xs text-gray-500">Nenhum membro encontrado</span>
+                            <span className="text-xs text-gray-500">
+                                <div className='flex items-center gap-2 justify-center'>
+                                    <LucideInfo className='h-4.5 text-gray-500 w-4.5 shrink-0' />
+                                    <span className='text-gray-500'>Nenhum membro encontrado</span>
+                                </div>
+                            </span>
                         </div>
                     )}
                     {members.map((member) => (

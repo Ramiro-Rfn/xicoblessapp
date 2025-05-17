@@ -4,6 +4,7 @@ import { revalidateData } from '@/app/action/revalidateData';
 import IconEye from '@/components/icon/icon-eye';
 import IconTrashLines from '@/components/icon/icon-trash-lines';
 import { api } from '@/services/axios';
+import { LucideInfo } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Swal from 'sweetalert2';
@@ -84,7 +85,10 @@ export function DocumentList({ documents, projectId }: DocumentListProps) {
         <div className="space-y-4">
             {documents.length === 0 ? (
                 <div className="text-center py-4 text-gray-500">
-                    Nenhum documento encontrado
+                    <div className='flex items-center gap-2 justify-center'>
+                        <LucideInfo className='h-4.5 text-gray-500 w-4.5 shrink-0' />
+                        <span className='text-gray-500'>Nenhum documento encontrado</span>
+                    </div>
                 </div>
             ) : (
 

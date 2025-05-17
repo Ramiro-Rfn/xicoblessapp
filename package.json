@@ -27,6 +27,7 @@
     "eslint-config-next": "15.3.2",
     "i18next": "^22.4.10",
     "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.511.0",
     "mantine-datatable": "^7.17.1",
     "next": "15.3.2",
     "ni18n": "^1.0.5",

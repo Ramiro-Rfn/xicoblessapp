@@ -1,10 +1,10 @@
 'use client';
 
 import { revalidateData } from '@/app/action/revalidateData';
-import IconEye from '@/components/icon/icon-eye';
 import IconTrashLines from '@/components/icon/icon-trash-lines';
 import { api } from '@/services/axios';
 import { differenceInCalendarWeeks, format } from 'date-fns';
+import { LucideEye, LucideInfo } from 'lucide-react';
 import Link from 'next/link';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
@@ -13,6 +13,7 @@ import { Documents } from '../Documents';
 import { CreatePhaseModal } from './CreatePhaseModal';
 import { EditPhaseModal } from './EditPhaseModal';
 import { ProjectMembers } from './ProjectMembers';
+import { ProjectImage } from './ProjectMembers/ProjectImage';
 
 type Project = {
     id: string
@@ -24,6 +25,7 @@ type Project = {
     status: string
     startDate: Date
     endDate: Date
+    image: string
     customerId: string
 }
 
@@ -80,7 +82,7 @@ const ComponentsProprietiesDetail = ({ project, phases, documents }: ProjectDeta
 
             showMessage('Fase Apagada')
 
-            revalidateData(`propriedades/${projectId}`)
+            revalidateData(`/propriedades/${projectId}`)
         } catch (error) {
             showMessage('Erro ao apagar fase')
 
@@ -115,12 +117,12 @@ const ComponentsProprietiesDetail = ({ project, phases, documents }: ProjectDeta
 
     return (
         <div>
-            <div className=" overflow-hidden flex flex-col gap-8 p-1 rounded-md text-center" key={project.id}>
+            <div className=" flex flex-col gap-8 p-1 rounded-md text-center" key={project.id}>
                 <div className="flex-1 flex overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]">
-                    <div className=" overflow-hidden p-6 w-1/2">
-                        <img className="mx-auto rounded-md max-h-90 h-full bg-center object-cover" src={`/assets/images/default-home-cover.png`} alt="propriety_image" />
+                    <div className="overflow-hidden h-full p-6">
+                        <ProjectImage image={project.image} projectId={project.id} />
                     </div>
-                    <div className="relative px-6 pb-24">
+                    <div className="relative px-6">
                         <div className="mt-6 grid grid-cols-1 gap-4 ltr:text-left rtl:text-right">
                             <div className="flex items-center">
                                 <div className="truncate text-3xl font-bold text-black">{project.name}</div>
@@ -159,8 +161,13 @@ const ComponentsProprietiesDetail = ({ project, phases, documents }: ProjectDeta
 
 
             <div className="flex items-end justify-between gap-4 mt-10">
-                <h2 className="text-xl font-bold">Etapas da obra</h2>
+
+                <div className='flex flex-col'>
+                    <h2 className="text-xl font-bold">Etapas da obra</h2>
+                    <p className='text-gray-500'>Lista de etapas que compõem o projeto</p>
+                </div>
                 <CreatePhaseModal projectId={project.id} />
+
             </div>
 
             <div className="panel mt-5 overflow-hidden border-0 p-0">
@@ -180,6 +187,16 @@ const ComponentsProprietiesDetail = ({ project, phases, documents }: ProjectDeta
                                 </tr>
                             </thead>
                             <tbody>
+                                {!phases.length && (
+                                    <tr>
+                                        <td colSpan={8} className='text-center'>
+                                            <div className='flex items-center gap-2 justify-center'>
+                                                <LucideInfo className='h-4.5 text-gray-500 w-4.5 shrink-0' />
+                                                <span className='text-gray-500'>Nenhuma etapa encontrada</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )}
                                 {phases.map((phase) => {
                                     return (
                                         <tr key={phase.id}>
@@ -198,19 +215,18 @@ const ComponentsProprietiesDetail = ({ project, phases, documents }: ProjectDeta
                                             <td className={"whitespace-nowrap capitalize"} >
                                                 <span className={`badge badge-outline-primary ${begdeColorStatus(phase.status)}`}>{begdeStatus(phase.status)}</span>
                                             </td>
-                                            <td className='flex justify-end'>
-                                                <div className="flex items-center justify-center gap-4">
-                                                    <Link href={`/propriedades/etapas/${phase.id}`}>
-                                                        <button type="button" className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2">
-
-                                                            <IconEye className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" />
+                                            <td className='flex items-center'>
+                                                <div className="flex items-center justify-center gap-2">
+                                                    <Link href={`/propriedades/etapas/${phase.id}`} className="h-4.5 w-4.5">
+                                                        <button type="button" className="">
+                                                            <LucideEye size={20} className="shrink-0" />
                                                         </button>
                                                     </Link>
 
                                                     <EditPhaseModal phase={phase}  />
 
                                                     <button type="button" onClick={() => deletePhase(phase.id, phase.projectId)}>
-                                                        <IconTrashLines className="shrink-0 ltr:mr-2 rtl:ml-2" />
+                                                        <IconTrashLines className="shrink-0" />
                                                     </button>
                                                 </div>
                                             </td>
