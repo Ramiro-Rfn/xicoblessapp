@@ -1,5 +1,6 @@
 'use client';
 
+import { revalidateData } from "@/app/action/revalidateData";
 import IconTrashLines from "@/components/icon/icon-trash-lines";
 import { api } from "@/services/axios";
 import Swal from "sweetalert2";
@@ -10,7 +11,7 @@ interface StockProps {
     loadMaterials: () => void
 }
 
-const   ComponentsTaskMaterial = ({ taskMaterials, taskId, loadMaterials }: StockProps) => {
+const   ComponentsTaskMaterial = ({ taskMaterials, taskId }: StockProps) => {
 
     const showMessage = (msg = '', type = 'success') => {
         const toast: any = Swal.mixin({
@@ -32,7 +33,7 @@ const   ComponentsTaskMaterial = ({ taskMaterials, taskId, loadMaterials }: Stoc
             await api.delete(`/taskmaterials/delete/${taskMaterialId}`)
 
             showMessage('Material apagado com sucesso!')
-            loadMaterials()
+            revalidateData(`/propriedades/etapas/`)
         } catch (error) {
             console.log(error)
             showMessage('Erro ao apagar material!', 'error')
