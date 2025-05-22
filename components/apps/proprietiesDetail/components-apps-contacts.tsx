@@ -25,6 +25,7 @@ type Project = {
     status: string
     startDate: Date
     endDate: Date
+    progress: number
     image: string
     customerId: string
 }
@@ -41,6 +42,7 @@ type Phase = {
     project: {
         name: string
     }
+    progress: number
 }
 
 type Document = {
@@ -212,7 +214,7 @@ const ComponentsProprietiesDetail = ({ project, phases, documents }: ProjectDeta
                                             }).format(phase.estimatedCost) } kz</td>
                                             <td className="whitespace-nowrap">
                                                 <div className='w-8'>
-                                                    <CircularProgressbar value={70} text={`${70}%`} />
+                                                    <CircularProgressbar value={phase.progress} text={`${phase.progress}%`} />
                                                 </div>
                                             </td>
                                             <td className={"whitespace-nowrap capitalize"} >

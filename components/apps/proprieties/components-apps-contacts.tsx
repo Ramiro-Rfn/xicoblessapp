@@ -2,12 +2,17 @@
 import IconSearch from '@/components/icon/icon-search';
 import { Fragment, useState } from 'react';
 
+import { revalidateData } from '@/app/action/revalidateData';
 import IconPlus from '@/components/icon/icon-plus';
 import IconX from '@/components/icon/icon-x';
+import { api } from '@/services/axios';
 import { Dialog, Transition } from '@headlessui/react';
 import { differenceInCalendarWeeks } from 'date-fns';
+import { LucideTrash2 } from 'lucide-react';
 import Link from 'next/link';
+import Swal from 'sweetalert2';
 import { Form } from './form';
+import UpdateProprietyModal from './updateProprietyModal';
 
 
 type Project = {
@@ -21,6 +26,7 @@ type Project = {
     startDate: Date
     endDate: Date
     customerId: string
+    url: string
 }
 
 interface ProprietiesProjectProps {
@@ -37,6 +43,33 @@ const ComponentsProprieties = ({ projects }: ProprietiesProjectProps) => {
 
     function handleCloseModal() {
         setAddContactModal(false)
+    }
+
+    const showMessage = (msg = '', type = 'success') => {
+        const toast: any = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000,
+            customClass: { container: 'toast' },
+        });
+        toast.fire({
+            icon: type,
+            title: msg,
+            padding: '10px 20px',
+        });
+    };
+
+    async function handleDeleteProject(id: string) {
+        try {
+            await api.delete(`/project/delete/${id}`)
+
+            showMessage('Projecto deletado com sucesso')
+
+            revalidateData(`/propriedades`)
+        } catch (error) {
+            showMessage('Erro ao deletar projecto')
+        }
     }
 
     return (
@@ -66,11 +99,16 @@ const ComponentsProprieties = ({ projects }: ProprietiesProjectProps) => {
                 <div className="mt-5 grid w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                     {projects.map((propriety) => {
                         return (
-                            <div className="relative overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]" key={propriety.id}>
-                                <div className="relative overflow-hidden rounded-md bg-white text-center shadow dark:bg-[#1c232f]">
+                            <div className="relative rounded-md bg-white text-center shadow dark:bg-[#1c232f]" key={propriety.id}>
+                                <div className="relative rounded-md bg-white text-center shadow dark:bg-[#1c232f]">
 
-                                    <div className=" overflow-hidden p-6 pb-0">
-                                        <img className="mx-auto rounded-md max-h-40 w-full object-cover" src={`/assets/images/default-home-cover.png`} alt="propriety_image" />
+                                    <div className=" overflow-hidden p-6 pb-0 h-40 w-full">
+                                        <div className="flex w-1/4 absolute top-8 right-4 items-center justify-center">
+                                            <button onClick={()=> handleDeleteProject(propriety.id)} className='w-8 h-8 rounded-full flex items-center justify-center bg-gray-100/50 hover:bg-gray-100'>
+                                                <LucideTrash2 size={16} />
+                                            </button>
+                                        </div>
+                                        <img className="mx-auto rounded-md max-h-40 w-full object-cover" src={propriety.url  ||`/assets/images/default-home-cover.png`} alt="propriety_image" />
                                     </div>
                                     <div className="relative px-6 pb-24">
                                         <div className="mt-6 grid grid-cols-1 gap-4 ltr:text-left rtl:text-right">
@@ -99,6 +137,8 @@ const ComponentsProprieties = ({ projects }: ProprietiesProjectProps) => {
                                                 Ver Detalhes
                                             </button>
                                         </Link>
+
+                                        <UpdateProprietyModal project={propriety} />
                                     </div>
                                 </div>
                             </div>
@@ -106,14 +146,18 @@ const ComponentsProprieties = ({ projects }: ProprietiesProjectProps) => {
                     })}
                 </div>
 
-
+            {/* @ts-ignore */}
             <Transition appear show={addContactModal} as={Fragment}>
+                {/* @ts-ignore */}
                 <Dialog as="div" open={addContactModal} onClose={() => setAddContactModal(false)} className="relative z-50">
+                    {/* @ts-ignore */}
                     <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
                         <div className="fixed inset-0 bg-[black]/60" />
                     </Transition.Child>
                     <div className="fixed inset-0 overflow-y-auto">
                         <div className="flex min-h-full items-center justify-center px-4 py-8">
+
+                            {/* @ts-ignore */}
                             <Transition.Child
                                 as={Fragment}
                                 enter="ease-out duration-300"
@@ -123,6 +167,7 @@ const ComponentsProprieties = ({ projects }: ProprietiesProjectProps) => {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
+                                {/* @ts-ignore */}
                                 <Dialog.Panel className="panel w-full max-w-lg overflow-hidden rounded-lg border-0 p-0 text-black dark:text-white-dark">
                                     <button
                                         type="button"

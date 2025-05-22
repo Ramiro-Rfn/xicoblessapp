@@ -1,11 +1,9 @@
 'use client';
 import App from '@/App';
-import store from '@/store';
-import { Provider } from 'react-redux';
-import React, { ReactNode, Suspense } from 'react';
-import { appWithI18Next } from 'ni18n';
-import { ni18nConfig } from 'ni18n.config.ts';
 import Loading from '@/components/layouts/loading';
+import store from '@/store';
+import { ReactNode, Suspense } from 'react';
+import { Provider } from 'react-redux';
 
 interface IProps {
     children?: ReactNode;

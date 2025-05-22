@@ -29,7 +29,7 @@ export function TaskMaterials({ task }: TaskMaterialsProps) {
     const [taskMaterials, setTaskMaterials] = useState<[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-
+    const [status, setStatus] = useState(task.status);
     const fetchTaskMaterials = async () => {
         setIsLoading(true);
         const response = await api.get(`/taskmaterials/all/${task.id}`);
@@ -108,6 +108,22 @@ export function TaskMaterials({ task }: TaskMaterialsProps) {
         }
     }
 
+    async function handleChangeStatus(status: string) {
+        try {
+            const response = await api.put(`/task/update/status/${task.id}`, { status })
+
+            const statusResponse = response.data.status
+
+            setStatus(statusResponse)
+
+            showMessage('Status atualizado com sucesso')
+            revalidateData(`propriedades/etapas/${task.executionPhaseId}`)
+        } catch (error) {
+            showMessage('Erro ao atualizar status')
+
+            console.log(error)
+        }
+    }
 
     return (
         <div className="flex flex-col panel p-0 ">
@@ -124,7 +140,15 @@ export function TaskMaterials({ task }: TaskMaterialsProps) {
 
                     <div className="flex flex-col gap-2 flex-1">
                         <div className={"whitespace-nowrap capitalize"} >
-                            <span className={`badge rounded-full badge-outline-primary ${begdeColorStatus(task.status)}`}>{begdeStatus(task.status)}</span>
+                            <div className={`badge rounded-full ${begdeColorStatus(status)}`}>
+                                <form action="">
+                                    <select className="bg-transparent border-none focus:outline-none" name="status" id="status" value={status} onChange={(e) => handleChangeStatus(e.target.value)}>
+                                        <option value="pending">Pendente</option>
+                                        <option value="in_progress">Em andamento</option>
+                                        <option value="completed">Concluído</option>
+                                    </select>
+                                </form>
+                            </div>
                         </div>
                         <div className="flex items-end justify-end gap-2 mt-1">
                             <EditTaskModal task={task} />

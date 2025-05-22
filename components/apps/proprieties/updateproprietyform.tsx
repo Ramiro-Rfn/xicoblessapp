@@ -8,23 +8,37 @@ import Swal from 'sweetalert2';
 import * as yup from 'yup';
 
 const schema = yup.object({
-    name: yup.string(),
-    location: yup.string(),
+    name: yup.string().nullable(),
+    location: yup.string().nullable(),
     description: yup.string().nullable(),
-    type: yup.string(),
-    startDate: yup.date(),
+    type: yup.string().nullable(),
+    startDate: yup.date().nullable(),
     endDate: yup.date(),
-    customerId: yup.string(),
+    customerId: yup.string()
 })
 
 type FormData = {
+    name: string | null
+    location: string | null
+    description: string | null
+    type: string | null
+    startDate: Date
+    endDate: Date
+    customerId: string | null
+}
+
+type Project = {
+    id: string
     name: string
     location: string
     description: string
     type: string
+    geoCoordinates: string
+    status: string
     startDate: Date
     endDate: Date
     customerId: string
+    url: string
 }
 
 type Customer = {
@@ -37,11 +51,14 @@ type Customer = {
     company: string
 }
 
+
+
 interface FormProps {
     closeModal: ()=> void
+    project: Project
 }
 
-export function Form({ closeModal }: FormProps) {
+export function UpdateForm({ closeModal, project }: FormProps) {
 
     const {
         handleSubmit,
@@ -49,6 +66,15 @@ export function Form({ closeModal }: FormProps) {
         formState: { errors, isSubmitting },
       } = useForm({
         resolver: yupResolver(schema),
+        defaultValues: {
+            name: project.name,
+            location: project.location,
+            description: project.description,
+            type: project.type,
+            startDate: new Date(project.startDate).toISOString().split('T')[0],
+            endDate: new Date(project.endDate).toISOString().split('T')[0],
+            customerId: project.customerId
+        }
     })
 
     const [customers, setCustomers] = useState<Customer[]>([])
@@ -69,10 +95,8 @@ export function Form({ closeModal }: FormProps) {
     };
 
     async function handleSubmitForm(data: FormData) {
-
-
         try {
-            const response = await  api.post('/project/create', {
+            await  api.put(`/project/update/${project.id}`, {
                 name: data.name,
                 location: data.location,
                 description: data.description,
@@ -82,12 +106,12 @@ export function Form({ closeModal }: FormProps) {
                 customer_id: data.customerId
             })
 
-            const project = response.data
 
-            showMessage('Cliente Criado com sucesso!')
+            showMessage('Projecto atualizado com sucesso!')
+
             revalidateData('/propriedades')
         } catch (error) {
-            showMessage('Erro ao criar cliente!', 'error')
+            showMessage('Erro ao atualizar Projecto!', 'error')
             console.log(error)
         }
     }

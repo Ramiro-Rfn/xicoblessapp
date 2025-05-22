@@ -40,7 +40,7 @@ interface FormProps {
     phase: Phase
 }
 
-export function CreatePhaseForm({ closeModal, phase }: FormProps) {
+export function EditPhaseForm({ closeModal, phase }: FormProps) {
 
     const {
         handleSubmit,

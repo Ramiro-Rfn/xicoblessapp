@@ -4,7 +4,7 @@ import IconX from "@/components/icon/icon-x";
 import { Dialog, Transition, } from "@headlessui/react";
 import { LucideEdit } from "lucide-react";
 import { Fragment, useState } from "react";
-import { CreatePhaseForm } from "./editPhaseform";
+import { EditPhaseForm } from "./editPhaseform";
 
 type Phase = {
     id: string
@@ -18,6 +18,7 @@ type Phase = {
         name: string
     }
     estimatedCost: number
+    progress: number
 }
 
 interface CreatePhaseModalProps {
@@ -82,7 +83,7 @@ export function EditPhaseModal({ phase }: CreatePhaseModalProps) {
                                         Adicionar Fase
                                     </div>
                                     <div className="p-5">
-                                        <CreatePhaseForm phase={phase} closeModal={handleCloseModal} />
+                                        <EditPhaseForm phase={phase} closeModal={handleCloseModal} />
                                     </div>
                                 </Dialog.Panel>
                             </Transition.Child>

@@ -19,6 +19,7 @@ type Phase = {
         name: string
     }
     projectId: string
+    progress: number
 }
 
 
@@ -122,10 +123,10 @@ const ComponentsProprietiesDetail = ({ phase, tasks }: PhaseDetailProps) => {
                         </div>
                     </div>
                     <div className="bg-secondary text-white flex items-center text-xs justify-center px-2 py-1 rounded-full">
-                        60% Concluído
+                        {phase.progress}% Concluído
                     </div>
                   </div>
-                  <ProgressBar completed={60} className='h-2' height='8px' labelAlignment="outside" />
+                  <ProgressBar completed={phase.progress} className='h-2' height='8px' labelAlignment="outside" />
                 </div>
 
 
